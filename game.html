@@ -467,6 +467,28 @@ const STAGES = [
       { type: "read", prompt: "What number is this?", numeral: "MCM", answer: 1900, options: [1100, 1900, 2100, 1090], explain: "M (1000) + CM (900) = 1900." },
       { type: "story", prompt: "A new bridge cost <strong>CD</strong> coins. How many coins?", numeral: "CD", answer: 400, options: [600, 400, 401, 100], explain: "CD means \"100 before 500\" = 500 − 100 = 400." }
     ]
+  },
+  { id: "wild", name: "The Wild Frontier", rewardName: "The Antiquarian's Glass", rewardLetter: "V", illus: "wild",
+    story: "Before Marcus can deliver the scroll, the Emperor's chief scholar pulls him aside. He unrolls a stack of rubbings taken from inscriptions in the wild eastern provinces — half of them don't follow the rules Marcus has learned. \"In the wild lands,\" the scholar says with a grin, \"the rules of Rome were never as tidy as we like to teach. Master these older forms before you read the lost scroll, and you'll be ready for any inscription Rome can throw at you.\"",
+    origins: [
+      { sym: "IIII", val: 4, text: "<strong>The clock-maker's IIII.</strong> Long after the rule said use IV for 4, watchmakers kept writing IIII because it visually balances VIII on the opposite side of the clock face. Look at any old grandfather clock — most use IIII, not IV. Both are correct; IIII is just older." },
+      { sym: "VIIII", val: 9, text: "<strong>The old way of writing 9.</strong> Before the subtraction trick caught on widely, Romans simply added more I's. Stone carvers chiseled VIIII for nine on tombstones and monuments. You'll see it on really old buildings and Roman coins." },
+      { sym: "V̄", val: 5000, text: "<strong>The bar above.</strong> To write very big numbers, Romans drew a bar over a numeral to multiply it by 1,000. So V with a bar is 5,000 and X with a bar is 10,000. You'll see it in old census records of armies and emperors who counted soldiers in tens of thousands." }
+    ],
+    math: { label: "When the rules bend", text: "Old Roman writing wasn't always strict. Sometimes you'll see <strong>IIII</strong> for 4, <strong>VIIII</strong> for 9, and a <strong>bar</strong> over numerals to mean \"times 1,000.\" Both IIII and IV mean 4 — they're just different traditions, separated by centuries.", example: "IIII = IV = 4   ⚔   V̄ (V with a bar) = 5,000" },
+    examples: [
+      {n:"IIII",v:4},{n:"VIIII",v:9},{n:"XIIII",v:14},
+      {n:"XXXX",v:40},{n:"V̄",v:5000},{n:"X̄",v:10000},
+      {n:"L̄",v:50000},{n:"C̄",v:100000},{n:"M̄",v:1000000}
+    ],
+    questions: [
+      { type: "read", prompt: "On an old grandfather clock face, this number appears:", numeral: "IIII", answer: 4, options: [3, 4, 6, 9], explain: "IIII is the clock-maker's traditional form for 4. It balances the VIII on the opposite side of the clock face." },
+      { type: "read", prompt: "An ancient stone tablet reads:", numeral: "VIIII", answer: 9, options: [4, 8, 9, 14], explain: "VIIII is the older additive form of 9 (V + I + I + I + I = 9). The modern IX uses the subtraction trick instead." },
+      { type: "story", prompt: "An old Roman census records the legion's strength as <strong>V̄</strong> soldiers. How many?", numeral: "V̄", answer: 5000, options: [50, 500, 5000, 50000], explain: "The bar over a numeral multiplies it by 1,000. V (5) with a bar = 5,000." },
+      { type: "read", prompt: "A weathered tombstone shows the age:", numeral: "XXXX", answer: 40, options: [4, 40, 80, 400], explain: "XXXX is the old additive form of 40 (X + X + X + X = 40). The modern XL uses the subtraction trick." },
+      { type: "story", prompt: "An ancient inscription says the city walls stretched <strong>X̄</strong> paces. How far?", numeral: "X̄", answer: 10000, options: [10, 1000, 10000, 100000], explain: "X (10) with a bar = 10,000. Romans used the bar to write very big numbers without filling the page with M's." },
+      { type: "math", prompt: "If a coin reads <strong>IIII</strong> and another reads <strong>IV</strong>, what's their sum?", numeral: "IIII + IV", answer: 8, options: [4, 8, 14, 44], explain: "Both IIII and IV equal 4. So 4 + 4 = 8 (or VIII)." }
+    ]
   }
 ];
 const FINAL_CHALLENGE = {
@@ -511,6 +533,7 @@ function svgIllus(kind) {
   if (kind === "aqueduct") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman aqueduct"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><path d="M 12 110 L 12 60 Q 12 36 36 36 L 60 36 Q 84 36 84 60 L 84 110 Z"/><path d="M 96 110 L 96 60 Q 96 36 120 36 L 144 36 Q 168 36 168 60 L 168 110 Z"/><path d="M 180 110 L 180 60 Q 180 36 204 36 L 228 36 Q 252 36 252 60 L 252 110 Z"/></g><rect x="0" y="20" width="280" height="16" fill="${STONE}" stroke="${INK}" stroke-width="1.2"/><rect x="0" y="14" width="280" height="6" fill="#5BA3D8"/></svg>`;
   if (kind === "colosseum") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Colosseum"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><ellipse cx="140" cy="110" rx="130" ry="50" fill="${PARCH}" stroke="${INK}" stroke-width="1.5"/><ellipse cx="140" cy="80" rx="120" ry="32" fill="none" stroke="${INK}" stroke-width="1"/><ellipse cx="140" cy="92" rx="125" ry="38" fill="none" stroke="${INK}" stroke-width="1"/><g fill="${INK}"><rect x="22" y="78" width="6" height="26"/><rect x="42" y="72" width="6" height="32"/><rect x="62" y="68" width="6" height="36"/><rect x="82" y="64" width="6" height="40"/><rect x="102" y="60" width="6" height="44"/><rect x="122" y="58" width="6" height="46"/><rect x="148" y="58" width="6" height="46"/><rect x="168" y="60" width="6" height="44"/><rect x="188" y="64" width="6" height="40"/><rect x="208" y="68" width="6" height="36"/><rect x="228" y="72" width="6" height="32"/><rect x="248" y="78" width="6" height="26"/></g><rect x="132" y="74" width="16" height="36" fill="${WINE}" stroke="${INK}" stroke-width="1"/><rect x="134" y="76" width="12" height="30" fill="${INK}"/><g fill="${LAUREL}" stroke="${INK}" stroke-width="0.8"><ellipse cx="140" cy="38" rx="34" ry="10" fill="none" stroke-width="1.5"/><ellipse cx="112" cy="38" rx="5" ry="3"/><ellipse cx="120" cy="32" rx="5" ry="3"/><ellipse cx="130" cy="30" rx="5" ry="3"/><ellipse cx="140" cy="28" rx="5" ry="3"/><ellipse cx="150" cy="30" rx="5" ry="3"/><ellipse cx="160" cy="32" rx="5" ry="3"/><ellipse cx="168" cy="38" rx="5" ry="3"/></g><circle cx="140" cy="38" r="5" fill="${TERRA}" stroke="${INK}" stroke-width="1"/></svg>`;
   if (kind === "hall") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Emperor's hall"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><rect x="0" y="0" width="280" height="22" fill="${WINE}" stroke="${INK}" stroke-width="1"/><text x="140" y="15" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="${GOLD}" font-weight="700">SENATVS POPVLVSQVE ROMANVS</text><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><rect x="24" y="26" width="16" height="84"/><rect x="60" y="26" width="16" height="84"/><rect x="204" y="26" width="16" height="84"/><rect x="240" y="26" width="16" height="84"/></g><rect x="120" y="50" width="40" height="60" fill="${GOLD}" stroke="${INK}" stroke-width="1.5"/><rect x="116" y="44" width="48" height="10" fill="${WINE}" stroke="${INK}" stroke-width="1.2"/><rect x="124" y="58" width="32" height="40" fill="${TERRA}"/><circle cx="140" cy="40" r="6" fill="${GOLD}" stroke="${INK}" stroke-width="1"/></svg>`;
+  if (kind === "wild") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman ruins in the wild frontier"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><path d="M 0 92 Q 70 78 140 84 T 280 90 L 280 110 L 0 110 Z" fill="${STONE}" opacity="0.55"/><rect x="46" y="50" width="20" height="60" fill="${PARCH}" stroke="${INK}" stroke-width="1.2"/><polygon points="42,50 70,50 66,46 46,46" fill="${PARCH}" stroke="${INK}" stroke-width="1.2"/><line x1="50" y1="55" x2="50" y2="106" stroke="${INK}" stroke-width="0.4" opacity="0.5"/><line x1="56" y1="55" x2="56" y2="106" stroke="${INK}" stroke-width="0.4" opacity="0.5"/><line x1="62" y1="55" x2="62" y2="106" stroke="${INK}" stroke-width="0.4" opacity="0.5"/><rect x="200" y="38" width="20" height="72" fill="${PARCH}" stroke="${INK}" stroke-width="1.2"/><polygon points="196,38 224,38 220,34 200,34" fill="${PARCH}" stroke="${INK}" stroke-width="1.2"/><line x1="204" y1="42" x2="204" y2="106" stroke="${INK}" stroke-width="0.4" opacity="0.5"/><line x1="210" y1="42" x2="210" y2="106" stroke="${INK}" stroke-width="0.4" opacity="0.5"/><line x1="216" y1="42" x2="216" y2="106" stroke="${INK}" stroke-width="0.4" opacity="0.5"/><rect x="120" y="84" width="20" height="26" fill="${PARCH}" stroke="${INK}" stroke-width="1.2"/><polygon points="116,84 144,84 140,80 120,80" fill="${PARCH}" stroke="${INK}" stroke-width="1.2"/><ellipse cx="155" cy="113" rx="32" ry="4" fill="${STONE_D}" opacity="0.7"/><rect x="130" y="104" width="46" height="10" fill="${STONE}" stroke="${INK}" stroke-width="1.2"/><line x1="135" y1="108" x2="171" y2="108" stroke="${INK}" stroke-width="0.5" opacity="0.6"/><path d="M 40 56 Q 52 62 42 70 Q 56 76 46 86" stroke="${LAUREL}" stroke-width="1.5" fill="none" opacity="0.85"/><ellipse cx="44" cy="62" rx="3" ry="2" fill="${LAUREL}"/><ellipse cx="48" cy="74" rx="3" ry="2" fill="${LAUREL}"/><ellipse cx="50" cy="88" rx="3" ry="2" fill="${LAUREL}"/><line x1="201" y1="60" x2="219" y2="60" stroke="${INK}" stroke-width="0.5" opacity="0.7"/><line x1="201" y1="68" x2="219" y2="68" stroke="${INK}" stroke-width="0.5" opacity="0.7"/><text x="210" y="78" text-anchor="middle" font-family="Cinzel, serif" font-size="6" fill="${INK}" opacity="0.7">VIIII</text></svg>`;
   if (kind === "trophy") return `<svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laurel trophy"><ellipse cx="50" cy="115" rx="36" ry="3" fill="${INK}" opacity="0.25"/><rect x="44" y="92" width="12" height="20" fill="${GOLD}" stroke="${INK}" stroke-width="1.2"/><rect x="36" y="108" width="28" height="6" fill="${GOLD}" stroke="${INK}" stroke-width="1.2"/><ellipse cx="50" cy="60" rx="38" ry="38" fill="none" stroke="${LAUREL}" stroke-width="3"/><g fill="${LAUREL}" stroke="${INK}" stroke-width="0.8"><ellipse cx="14" cy="60" rx="7" ry="4" transform="rotate(-30 14 60)"/><ellipse cx="20" cy="42" rx="7" ry="4" transform="rotate(-50 20 42)"/><ellipse cx="32" cy="28" rx="7" ry="4" transform="rotate(-70 32 28)"/><ellipse cx="50" cy="22" rx="7" ry="4"/><ellipse cx="68" cy="28" rx="7" ry="4" transform="rotate(70 68 28)"/><ellipse cx="80" cy="42" rx="7" ry="4" transform="rotate(50 80 42)"/><ellipse cx="86" cy="60" rx="7" ry="4" transform="rotate(30 86 60)"/><ellipse cx="80" cy="78" rx="7" ry="4" transform="rotate(-30 80 78)"/><ellipse cx="20" cy="78" rx="7" ry="4" transform="rotate(30 20 78)"/></g><text x="50" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="22" fill="${WINE}" font-weight="700">SPQR</text></svg>`;
   return "";
 }
@@ -574,7 +597,7 @@ function findPlayer(id) {
   return state.players.find(p => p.id === id);
 }
 function defaultGameState() {
-  return { screen: "welcome", stage: 0, qIndex: 0, score: 0, totalQuestions: totalQuestions(), badges: [false,false,false,false], lastSelected: null, lastCorrect: null, finalQIndex: 0 };
+  return { screen: "welcome", stage: 0, qIndex: 0, score: 0, totalQuestions: totalQuestions(), badges: [false,false,false,false,false], lastSelected: null, lastCorrect: null, finalQIndex: 0 };
 }
 function migrateOldSave() {
   // If a v1 save exists and there are no v2 players yet, convert it to a default "Marcus" player.
@@ -595,7 +618,11 @@ function migrateOldSave() {
         qIndex: old.qIndex || 0,
         score: old.score || 0,
         totalQuestions: old.totalQuestions || totalQuestions(),
-        badges: Array.isArray(old.badges) ? old.badges.slice() : [false,false,false,false],
+        badges: (function(){
+          const b = Array.isArray(old.badges) ? old.badges.slice() : [false,false,false,false,false];
+          while (b.length < STAGES.length) b.push(false);
+          return b;
+        })(),
         lastSelected: typeof old.lastSelected !== "undefined" ? old.lastSelected : null,
         lastCorrect: typeof old.lastCorrect !== "undefined" ? old.lastCorrect : null,
         finalQIndex: old.finalQIndex || 0
@@ -629,7 +656,9 @@ function loadActivePlayerGameState() {
   state.qIndex = g.qIndex || 0;
   state.score = g.score || 0;
   state.totalQuestions = g.totalQuestions || totalQuestions();
-  state.badges = Array.isArray(g.badges) ? g.badges.slice() : [false,false,false,false];
+  state.badges = Array.isArray(g.badges) ? g.badges.slice() : [false,false,false,false,false];
+  // Pad to current STAGES length so old saves (4 stages) still work
+  while (state.badges.length < STAGES.length) state.badges.push(false);
   state.lastSelected = typeof g.lastSelected !== "undefined" ? g.lastSelected : null;
   state.lastCorrect = typeof g.lastCorrect !== "undefined" ? g.lastCorrect : null;
   state.finalQIndex = g.finalQIndex || 0;
@@ -641,7 +670,7 @@ let state = {
   screen: "picker",
   // Game state for the active player (mirrors what's saved in their player record):
   stage: 0, qIndex: 0, score: 0, totalQuestions: 0,
-  badges: [false,false,false,false],
+  badges: [false,false,false,false,false],
   lastSelected: null, lastCorrect: null, finalQIndex: 0,
   // Global UI state:
   showHelp: false,
@@ -670,12 +699,12 @@ function helpPanel() {
 function topBar(showProgress) {
   if (!showProgress) return "";
   let dots = "";
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < STAGES.length; i++) {
     let cls = "stage-dot";
     if (state.badges[i]) cls += " done";
     else if (state.stage === i && (state.screen === "story" || state.screen === "lesson" || state.screen === "practice")) cls += " current";
-    dots += `<div class="${cls}">${["I","II","III","IV"][i]}</div>`;
-    if (i < 3) dots += `<div class="stage-line"></div>`;
+    dots += `<div class="${cls}">${STAGES[i].rewardLetter}</div>`;
+    if (i < STAGES.length - 1) dots += `<div class="stage-line"></div>`;
   }
   return `<div class="top-bar"><div class="progress-map">${dots}</div><div class="score-pill">★ ${state.score}</div></div>`;
 }
@@ -694,9 +723,9 @@ function renderPicker() {
     const mark = p.gender === "girl" ? "♀" : (p.gender === "boy" ? "♂" : "");
     const badgeDots = p.gameState && Array.isArray(p.gameState.badges)
       ? p.gameState.badges.map(b => `<span class="b-dot${b ? ' earned' : ''}"></span>`).join("")
-      : '<span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span>';
+      : '<span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span>';
     const score = (p.gameState && typeof p.gameState.score === "number") ? p.gameState.score : 0;
-    const stageNames = ["The Forum", "The Aqueduct", "The Colosseum", "The Emperor's Hall"];
+    const stageNames = ["The Forum", "The Aqueduct", "The Colosseum", "The Emperor's Hall", "The Wild Frontier"];
     let progressLabel = "Hasn't started yet";
     if (p.gameState && p.gameState.screen) {
       if (p.gameState.screen === "victory") progressLabel = "Finished the journey";
@@ -792,7 +821,7 @@ function renderWelcome() {
       <div class="max-w" style="margin-top:18px;">
         <div style="display:flex;gap:18px;align-items:center;text-align:left;">
           <div style="flex-shrink:0;">${svgIllus("marcus")}</div>
-          <p class="scene-text" style="margin:0;">You are a young messenger boy in ancient Rome. A mysterious scroll has appeared, written in symbols you cannot yet read. To deliver it, you must travel through four great places of Rome — the <strong>Forum</strong>, the <strong>Aqueduct</strong>, the <strong>Colosseum</strong>, and the <strong>Emperor's Hall</strong> — and master the ancient art of Roman numerals.</p>
+          <p class="scene-text" style="margin:0;">You are a young messenger boy in ancient Rome. A mysterious scroll has appeared, written in symbols you cannot yet read. To deliver it, you must travel through five places — the <strong>Forum</strong>, the <strong>Aqueduct</strong>, the <strong>Colosseum</strong>, the <strong>Emperor's Hall</strong>, and the <strong>Wild Frontier</strong> — and master the ancient art of Roman numerals.</p>
         </div>
       </div>
       ${helpPanel()}
@@ -802,7 +831,7 @@ function renderWelcome() {
 
 function renderStory() {
   const s = STAGES[state.stage];
-  return `${playerStrip()}${topBar(true)}${helpButton()}<div class="scene-illus">${svgIllus(s.illus)}</div><div class="qtype-chip center" style="display:block;text-align:center;">Stage ${state.stage + 1} of IV</div><h2 class="scene-title">${s.name}</h2><div class="max-w"><p class="scene-text">${s.story}</p></div>${helpPanel()}<button class="primary-btn" data-action="to-lesson">Meet the Symbols</button>`;
+  return `${playerStrip()}${topBar(true)}${helpButton()}<div class="scene-illus">${svgIllus(s.illus)}</div><div class="qtype-chip center" style="display:block;text-align:center;">Stage ${state.stage + 1} of V</div><h2 class="scene-title">${s.name}</h2><div class="max-w"><p class="scene-text">${s.story}</p></div>${helpPanel()}<button class="primary-btn" data-action="to-lesson">Meet the Symbols</button>`;
 }
 function renderLesson() {
   const s = STAGES[state.stage];
@@ -834,7 +863,7 @@ function renderPractice() {
 function renderReward() {
   const s = STAGES[state.stage];
   const isLast = state.stage === STAGES.length - 1;
-  return `${playerStrip()}${topBar(true)}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><h2 class="scene-title">Stage Complete!</h2><div class="reward-name">You earned ${s.rewardName}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge ${earned ? 'earned' : 'locked'}" title="${STAGES[i].rewardName}"><span class="roman">${["I","II","III","IV"][i]}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);">${isLast ? "All four badges are yours! The path to the Emperor's Hall is complete. The lost scroll awaits..." : "Marcus tucks the reward into his satchel and continues toward his next destination."}</p><button class="primary-btn" data-action="${isLast ? 'to-final' : 'next-stage'}">${isLast ? "Read the Lost Scroll" : "Continue the Journey"}</button></div>`;
+  return `${playerStrip()}${topBar(true)}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><h2 class="scene-title">Stage Complete!</h2><div class="reward-name">You earned ${s.rewardName}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge ${earned ? 'earned' : 'locked'}" title="${STAGES[i].rewardName}"><span class="roman">${STAGES[i].rewardLetter}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);">${isLast ? "All five badges are yours! The Wild has been mapped and the older rules learned. The lost scroll awaits..." : "Marcus tucks the reward into his satchel and continues toward his next destination."}</p><button class="primary-btn" data-action="${isLast ? 'to-final' : 'next-stage'}">${isLast ? "Read the Lost Scroll" : "Continue the Journey"}</button></div>`;
 }
 function renderFinal() {
   const q = FINAL_CHALLENGE.questions[state.finalQIndex];
@@ -860,7 +889,7 @@ function renderFinal() {
 function renderVictory() {
   const p = findPlayer(state.activePlayerId);
   const name = p ? escapeHtml(p.name) : "Messenger";
-  return `${playerStrip()}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><div class="victory-banner"><h1>VICTORY, ${name.toUpperCase()}!</h1><div class="scene-subtitle">Messenger of Rome</div></div><p class="scene-text max-w">You read every line of the lost scroll and delivered the message to the Emperor himself. The Senate and People of Rome honor your skill. You now understand Roman numerals — the same symbols still used today on clocks, chapter headings, the Olympic Games, movie credits, and the Super Bowl!</p><div class="victory-final-score">Final score: ${state.score} / ${state.totalQuestions}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge earned" title="${STAGES[i].rewardName}"><span class="roman">${["I","II","III","IV"][i]}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);text-align:center;">— Ave Roma, Ave ${name} —</p><button class="primary-btn" data-action="restart-player">Play Again</button><button class="restart-btn" data-action="back-to-picker">Back to player picker</button></div>`;
+  return `${playerStrip()}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><div class="victory-banner"><h1>VICTORY, ${name.toUpperCase()}!</h1><div class="scene-subtitle">Messenger of Rome</div></div><p class="scene-text max-w">You read every line of the lost scroll and delivered the message to the Emperor himself. The Senate and People of Rome honor your skill. You now understand Roman numerals — the same symbols still used today on clocks, chapter headings, the Olympic Games, movie credits, and the Super Bowl!</p><div class="victory-final-score">Final score: ${state.score} / ${state.totalQuestions}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge earned" title="${STAGES[i].rewardName}"><span class="roman">${STAGES[i].rewardLetter}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);text-align:center;">— Ave Roma, Ave ${name} —</p><button class="primary-btn" data-action="restart-player">Play Again</button><button class="restart-btn" data-action="back-to-picker">Back to player picker</button></div>`;
 }
 
 function renderModal() {

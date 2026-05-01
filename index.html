@@ -280,7 +280,7 @@
       <div class="resume-pill" id="resume-pill">Continue your adventure</div>
       <div class="doorway-label">For Students</div>
       <h2>Play the Game</h2>
-      <p id="students-desc">Begin Marcus's journey through four great places of Rome. Your progress saves automatically — close the tab and come back any time.</p>
+      <p id="students-desc">Begin Marcus's journey through five places of Rome — including the Wild Frontier where the rules bend. Progress saves automatically; close the tab and come back any time.</p>
       <span class="doorway-btn" id="students-btn">Begin the Journey →</span>
     </a>
 
@@ -345,7 +345,7 @@
     if (!raw) return;
     const saved = JSON.parse(raw);
     if (!saved || !saved.screen || saved.screen === "welcome" || saved.screen === "victory") return;
-    const STAGE_NAMES = ["The Forum", "The Great Aqueduct", "The Colosseum", "The Emperor's Hall"];
+    const STAGE_NAMES = ["The Forum", "The Great Aqueduct", "The Colosseum", "The Emperor's Hall", "The Wild Frontier"];
     const stageName = saved.screen === "final"
       ? "the Lost Scroll"
       : (STAGE_NAMES[saved.stage] || "your journey");
