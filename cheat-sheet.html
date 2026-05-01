@@ -281,6 +281,97 @@
   }
   .print-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 0 var(--wine); }
   .print-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--wine); }
+  /* WHERE YOU'LL SEE THEM */
+  .where-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .where-card {
+    background: var(--parchment);
+    border: 1px solid var(--stone);
+    border-radius: 3px;
+    padding: 8px 10px;
+  }
+  .where-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--wine);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .where-example { font-size: 12px; line-height: 1.45; }
+  .where-example strong { font-family: 'Cinzel', serif; color: var(--ink); font-weight: 700; }
+  .where-aside { font-size: 9.5px; color: var(--ink-light); font-style: italic; display: block; margin-top: 2px; }
+  /* PAGE FLIP NOTE */
+  .page-flip-note {
+    text-align: center;
+    margin-top: 18px;
+    padding: 10px 14px;
+    background: var(--parchment-dark);
+    border: 1px dashed var(--stone-dark);
+    border-radius: 3px;
+    font-style: italic;
+    color: var(--wine);
+    font-size: 13px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.06em;
+  }
+  /* PAGE 2 */
+  .page-2-start { page-break-before: always; padding-top: 4px; }
+  .page-2-header { text-align: center; border-bottom: 2px solid var(--ink); padding-bottom: 12px; margin-bottom: 16px; }
+  .page-2-header h2 { font-size: 22px; border: none; margin: 0; padding: 0; text-transform: none; letter-spacing: 0.06em; }
+  .page-2-header .page-2-subtitle { font-style: italic; color: var(--ink-light); font-size: 12px; margin-top: 4px; }
+  /* YEAR DECODER */
+  .year-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 18px;
+    margin-bottom: 4px;
+  }
+  .year-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--stone-dark);
+    font-size: 13px;
+  }
+  .year-roman { font-family: 'Cinzel', serif; font-weight: 700; color: var(--ink); font-size: 14px; min-width: 90px; }
+  .year-context { font-size: 10.5px; color: var(--ink-light); font-style: italic; flex: 1; margin: 0 8px; }
+  .year-blank { color: var(--stone-dark); border-bottom: 1px solid var(--ink-light); height: 12px; width: 50px; flex-shrink: 0; }
+  /* NUMERAL MATH */
+  .math-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 14px;
+  }
+  .math-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--stone-dark);
+    font-size: 13px;
+  }
+  .math-q { font-family: 'Cinzel', serif; font-weight: 700; color: var(--ink); font-size: 14px; }
+  .math-blank { color: var(--stone-dark); border-bottom: 1px solid var(--ink-light); height: 12px; width: 40px; }
+  .section-intro { font-size: 12px; color: var(--ink-light); margin-bottom: 10px; font-style: italic; }
+  .key-section {
+    display: inline-block;
+    margin: 4px 10px 2px 0;
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
   /* PRINT */
   @media print {
     @page { margin: 0.5in; size: letter; }
@@ -290,10 +381,13 @@
     .sym-card { background: white; border-color: #000; }
     .worked { background: #f5f5f5; }
     .rule-card { box-shadow: none; }
+    .where-card { background: white; border-color: #000; }
+    .page-flip-note { background: white; }
+    .page-2-start { page-break-before: always; }
     h1 { color: #000; }
     h2 { color: #000; border-bottom-color: #000; }
-    .rule-title, .practice-col h3 { color: #000; }
-    .sym-card .letter, .worked-numeral, .practice-list .q-text { color: #000; }
+    .rule-title, .practice-col h3, .where-label, .key-section { color: #000; }
+    .sym-card .letter, .worked-numeral, .practice-list .q-text, .year-roman, .math-q { color: #000; }
   }
 </style>
 </head>
@@ -376,6 +470,44 @@
   <div class="worked-step"><span>Add it all up:</span><span class="calc">1000 + 900 + 80 + 4 = 1984</span></div>
 </div>
 
+<h2>Where You'll See Them</h2>
+<div class="where-grid">
+  <div class="where-card">
+    <div class="where-label">Movie credits</div>
+    <div class="where-example">© <strong>MMXXVI</strong> = 2026</div>
+  </div>
+  <div class="where-card">
+    <div class="where-label">Clock faces</div>
+    <div class="where-example"><strong>VIII</strong> = 8 o'clock<span class="where-aside">(some clocks use IIII for 4)</span></div>
+  </div>
+  <div class="where-card">
+    <div class="where-label">Super Bowls</div>
+    <div class="where-example">Super Bowl <strong>LIX</strong> = 59</div>
+  </div>
+  <div class="where-card">
+    <div class="where-label">Royal names</div>
+    <div class="where-example">Queen Elizabeth <strong>II</strong> = the second</div>
+  </div>
+  <div class="where-card">
+    <div class="where-label">Book chapters</div>
+    <div class="where-example">Chapter <strong>VII</strong> = chapter 7</div>
+  </div>
+  <div class="where-card">
+    <div class="where-label">Building dates</div>
+    <div class="where-example">EST. <strong>MCMXC</strong> = 1990</div>
+  </div>
+</div>
+
+<div class="page-flip-note">Practice on the back →</div>
+
+<!-- PAGE 2 -->
+<div class="page-2-start"></div>
+
+<div class="page-2-header">
+  <h2>Practice &amp; Challenge</h2>
+  <div class="page-2-subtitle">Fill in the blanks. Answer key at the bottom.</div>
+</div>
+
 <h2>Try It Yourself</h2>
 <div class="practice">
   <div class="practice-col">
@@ -406,8 +538,31 @@
   </div>
 </div>
 
+<h2>Year Decoder Challenge</h2>
+<div class="section-intro">Famous years written in Roman numerals — decode each one.</div>
+<ul class="year-list">
+  <li><span class="year-roman">MMXXVI</span><span class="year-context">(this year)</span><span class="year-blank"></span></li>
+  <li><span class="year-roman">MCMLXIX</span><span class="year-context">(moon landing)</span><span class="year-blank"></span></li>
+  <li><span class="year-roman">MDCCLXXVI</span><span class="year-context">(US independence)</span><span class="year-blank"></span></li>
+  <li><span class="year-roman">MCMXLV</span><span class="year-context">(end of WWII)</span><span class="year-blank"></span></li>
+  <li><span class="year-roman">MCDXCII</span><span class="year-context">(Columbus voyage)</span><span class="year-blank"></span></li>
+  <li><span class="year-roman">MCMLXXXIV</span><span class="year-context">(Macintosh launch)</span><span class="year-blank"></span></li>
+</ul>
+
+<h2>Numeral Math</h2>
+<div class="section-intro">Solve, then write the answer as a Roman numeral.</div>
+<ul class="math-list">
+  <li><span class="math-q">VII + III</span><span class="math-blank"></span></li>
+  <li><span class="math-q">XV − V</span><span class="math-blank"></span></li>
+  <li><span class="math-q">XX + IV</span><span class="math-blank"></span></li>
+  <li><span class="math-q">L − X</span><span class="math-blank"></span></li>
+  <li><span class="math-q">C + L</span><span class="math-blank"></span></li>
+  <li><span class="math-q">M − D</span><span class="math-blank"></span></li>
+</ul>
+
 <div class="answer-key">
   <strong>Answer Key</strong>
+  <span class="key-section">Try It Yourself:</span>
   <span class="key-block">1. 7</span>
   <span class="key-block">2. 14</span>
   <span class="key-block">3. 29</span>
@@ -416,7 +571,6 @@
   <span class="key-block">6. 455</span>
   <span class="key-block">7. 700</span>
   <span class="key-block">8. 1942</span>
-  <br>
   <span class="key-block">9. VIII</span>
   <span class="key-block">10. XIX</span>
   <span class="key-block">11. XL</span>
@@ -425,6 +579,22 @@
   <span class="key-block">14. D</span>
   <span class="key-block">15. CM</span>
   <span class="key-block">16. MMXXVI</span>
+  <br>
+  <span class="key-section">Year Decoder:</span>
+  <span class="key-block">2026</span>
+  <span class="key-block">1969</span>
+  <span class="key-block">1776</span>
+  <span class="key-block">1945</span>
+  <span class="key-block">1492</span>
+  <span class="key-block">1984</span>
+  <br>
+  <span class="key-section">Numeral Math:</span>
+  <span class="key-block">X (10)</span>
+  <span class="key-block">X (10)</span>
+  <span class="key-block">XXIV (24)</span>
+  <span class="key-block">XL (40)</span>
+  <span class="key-block">CL (150)</span>
+  <span class="key-block">D (500)</span>
 </div>
 
 <footer>SPQR · Senatus Populusque Romanus · Print, fold, share</footer>
