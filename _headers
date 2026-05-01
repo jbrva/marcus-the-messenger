@@ -1,0 +1,43 @@
+# Cloudflare Pages / Workers Static Assets headers config.
+# Format: path-pattern, then indented headers below.
+# Each push to main will redeploy; these rules ensure browsers actually see fresh HTML.
+
+# === Default (HTML pages) ===
+# - max-age=0 + must-revalidate forces the browser to re-check on every navigation,
+#   so a deploy is reflected immediately on next page load (no hard reload needed).
+# - Security headers apply to everything by default.
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: interest-cohort=()
+
+# === Static assets (cache aggressively) ===
+# These rarely change; when they do, the deploy will invalidate them at the edge.
+# Browsers can safely reuse cached copies for the listed durations.
+/favicon.svg
+  Cache-Control: public, max-age=86400, immutable
+
+/*.svg
+  Cache-Control: public, max-age=86400
+
+/*.css
+  Cache-Control: public, max-age=3600
+
+/*.js
+  Cache-Control: public, max-age=3600
+
+/*.png
+  Cache-Control: public, max-age=86400
+
+/*.jpg
+  Cache-Control: public, max-age=86400
+
+/*.woff2
+  Cache-Control: public, max-age=2592000, immutable
+
+# === Markdown source files (kept on GitHub but served from same domain) ===
+# Same no-cache as HTML so doc updates show up immediately if anyone bookmarks them.
+/*.md
+  Cache-Control: public, max-age=0, must-revalidate
