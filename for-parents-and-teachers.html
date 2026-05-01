@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcus and the Lost Scroll — Parents &amp; Teachers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #F5E6C8;
+    --parchment-light: #FAF1DC;
+    --parchment-dark: #E8D4A8;
+    --ink: #3A2814;
+    --ink-light: #6B4F35;
+    --terracotta: #C8553D;
+    --laurel: #5C7C4E;
+    --laurel-dark: #3F5635;
+    --imperial: #5B3E7D;
+    --gold: #D4A14A;
+    --gold-dark: #A87F35;
+    --wine: #7A2E1F;
+    --stone: #B8A984;
+    --stone-dark: #8A7B5C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 20% 10%, rgba(212, 161, 74, 0.08), transparent 50%),
+      radial-gradient(circle at 80% 90%, rgba(122, 46, 31, 0.07), transparent 50%),
+      var(--parchment);
+    min-height: 100vh;
+    padding: 24px 20px 60px;
+    line-height: 1.7;
+  }
+  .container { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .home-link {
+    display: inline-block;
+    color: var(--ink-light);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding: 4px 10px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+  .home-link:hover { color: var(--wine); border-color: var(--stone-dark); }
+
+  /* GATE */
+  .gate {
+    background: var(--parchment-light);
+    border: 1px solid var(--stone);
+    border-left: 5px solid var(--imperial);
+    border-radius: 4px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(58, 40, 20, 0.12);
+  }
+  .gate-icon { font-size: 44px; color: var(--imperial); margin-bottom: 14px; }
+  .gate h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    color: var(--wine);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .gate-subtitle {
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 22px;
+    font-size: 14px;
+  }
+  .gate-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 380px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .gate-input {
+    flex: 1 1 220px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--stone-dark);
+    border-radius: 4px;
+    background: var(--parchment);
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    color: var(--ink);
+    min-width: 200px;
+  }
+  .gate-input:focus {
+    outline: none;
+    border-color: var(--imperial);
+    box-shadow: 0 0 0 3px rgba(91, 62, 125, 0.18);
+  }
+  .gate-btn {
+    padding: 12px 22px;
+    background: var(--imperial);
+    color: var(--parchment-light);
+    border: 1.5px solid #432d5e;
+    border-radius: 4px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 0 #432d5e;
+  }
+  .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #432d5e; }
+  .gate-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 #432d5e; }
+  .gate-error {
+    display: none;
+    color: var(--terracotta);
+    margin-top: 14px;
+    font-size: 14px;
+    font-style: italic;
+  }
+  .gate-hint {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--stone-dark);
+    font-size: 12px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+  .gate-hint strong { color: var(--wine); }
+
+  /* CONTENT (hidden until unlock) */
+  .content { display: none; }
+  .content.unlocked { display: block; }
+  .content-card {
+    background: var(--parchment-light);
+    border: 1px solid var(--stone);
+    border-radius: 4px;
+    padding: 36px 32px;
+    box-shadow: 0 3px 14px rgba(58, 40, 20, 0.1);
+  }
+  .content h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 30px;
+    color: var(--wine);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .content .doc-subtitle {
+    font-style: italic;
+    color: var(--ink-light);
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 14px;
+  }
+  .content h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--wine);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--stone);
+  }
+  .content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--wine);
+    letter-spacing: 0.04em;
+    margin-top: 22px;
+    margin-bottom: 8px;
+  }
+  .content p { margin-bottom: 14px; font-size: 15px; }
+  .content p strong { color: var(--wine); }
+  .content em { color: var(--ink-light); }
+  .content ul, .content ol {
+    margin-left: 24px;
+    margin-bottom: 14px;
+    font-size: 15px;
+  }
+  .content li { margin-bottom: 6px; line-height: 1.65; }
+  .content li strong { color: var(--wine); }
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 18px;
+    background: var(--parchment);
+    font-size: 14px;
+  }
+  .content th, .content td {
+    padding: 8px 10px;
+    border: 1px solid var(--stone);
+    text-align: left;
+    vertical-align: top;
+  }
+  .content th {
+    background: var(--parchment-dark);
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  .content code {
+    background: var(--parchment-dark);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--wine);
+  }
+  .content blockquote {
+    border-left: 3px solid var(--gold-dark);
+    padding-left: 14px;
+    margin: 14px 0;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+  .stage-prompt-block {
+    background: var(--parchment);
+    border: 1px solid var(--stone);
+    border-radius: 3px;
+    padding: 12px 14px;
+    margin: 10px 0;
+  }
+  .stage-prompt-block .label {
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .footer-note {
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--stone-dark);
+    font-style: italic;
+    color: var(--ink-light);
+    font-size: 13px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="home-link">← Back to home</a>
+
+  <!-- GATE -->
+  <div class="gate" id="gate">
+    <div class="gate-icon">🔒</div>
+    <h1>For Parents &amp; Teachers</h1>
+    <div class="gate-subtitle">A guide to playing the game with your kid.</div>
+    <form class="gate-form" id="gate-form" autocomplete="off">
+      <input
+        type="password"
+        class="gate-input"
+        id="gate-input"
+        placeholder="Password"
+        autocomplete="off"
+        autofocus
+        aria-label="Password">
+      <button type="submit" class="gate-btn">Unlock</button>
+    </form>
+    <div class="gate-error" id="gate-error">That's not the right password.</div>
+    <div class="gate-hint">
+      <strong>Hint for parents:</strong> the password is a piece of classical Latin wordplay you'd typically hear in middle-school Latin class. Three Latin words run together, no spaces, all lowercase: <em>always · where · under-where</em>.
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content" id="content">
+    <div class="content-card">
+      <h1>Marcus and the Lost Scroll</h1>
+      <div class="doc-subtitle">A note for parents and teachers</div>
+
+      <p>A short guide to what the game teaches, how to play it together, and how to extend the learning if your kid is hooked.</p>
+
+      <h2>What it teaches</h2>
+      <p>By the time your child finishes the game, they will be able to:</p>
+      <ul>
+        <li>Recognize all seven Roman numerals (I, V, X, L, C, D, M) and recall their values.</li>
+        <li>Apply the addition rule (smaller after bigger = add).</li>
+        <li>Apply the subtraction rule (smaller before bigger = subtract).</li>
+        <li>Read mixed-rule numerals like XIV, XLIX, MCM, and MMXXVI.</li>
+        <li>Translate years and small story-problem numbers between Arabic and Roman form.</li>
+      </ul>
+      <p>The game does <em>not</em> cover the unusual edge cases (the bar overline for 5,000+, archaic forms like IIII on clock faces). It teaches the standard modern subtraction-style numerals — the ones your child will actually see on chapter headings, Super Bowl logos, copyright dates, and clocks.</p>
+
+      <h2>How concepts are introduced</h2>
+      <p>The game is intentionally gentle about cognitive load. Each stage adds only what the next stage needs:</p>
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>New concept</th><th>Why it's introduced here</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>I — The Forum</td><td>I, V, X and the <strong>addition rule</strong></td><td>Three symbols and one rule is the smallest amount you can build with.</td></tr>
+          <tr><td>II — The Aqueduct</td><td>L, C — still <strong>only addition</strong></td><td>Two new symbols, no new rule. The child consolidates addition.</td></tr>
+          <tr><td>III — The Colosseum</td><td>The <strong>subtraction trick</strong> (IV, IX, XL, XC)</td><td>Now the child has all the small/medium numerals memorized — they're ready for the twist.</td></tr>
+          <tr><td>IV — The Emperor's Hall</td><td>D, M, plus <strong>CD and CM</strong></td><td>Two new symbols, plus subtraction extended to bigger pairs.</td></tr>
+          <tr><td>Final — The Lost Scroll</td><td>Mixed challenges, including <strong>MMXXVI</strong> (this year)</td><td>Pulls everything together. The current-year question is deliberately included so the symbols feel like something they could actually use.</td></tr>
+        </tbody>
+      </table>
+      <p>Watching the kid work through each stage will tell you which rule needs more practice — wrong answers cluster around a specific rule, not random mistakes.</p>
+
+      <h2>How to play together</h2>
+      <p>The game is designed so a kid can play alone, but it gets noticeably more memorable when an adult sits with them for at least the first stage. Some things that work well:</p>
+      <p><strong>Pause on the origin cards.</strong> Each stage opens with explanations of where the symbols come from (V is the shape of an open hand, C is for <em>centum</em> like "century"). These are the part that makes the symbols stick. Read them out loud together. Ask your kid to hold up a hand and trace the V between thumb and forefinger.</p>
+      <p><strong>Read the story aloud the first time.</strong> The narrator voice (the scribe, the engineer, the gladiator trainer, the herald) gives each stage a personality. Hearing it read aloud makes the place feel real.</p>
+      <p><strong>Don't rush through wrong answers.</strong> When they get one wrong, the game shows a one-line explanation with the math broken out. Pause and read it together, then ask them to explain it back to you. That two-second pause is worth more than ten more practice questions.</p>
+      <p><strong>Let them push the help button.</strong> There's a <code>?</code> in the corner of every screen that opens a reference panel with all seven symbols and the rules. Encourage them to use it freely — looking things up is part of how this knowledge gets durable.</p>
+
+      <h2>Conversation prompts for after each stage</h2>
+      <p>These turn the play session into a quick five-minute conversation when they finish a stage:</p>
+
+      <div class="stage-prompt-block">
+        <div class="label">After Stage I (Forum)</div>
+        <ul>
+          <li><em>Why do you think Romans wrote 8 as VIII instead of just IIIIIIII?</em> (Shorter; easier to read at a glance.)</li>
+          <li><em>What number is your age in Roman numerals?</em> (For most kids: a chance to write their own age in I, V, X.)</li>
+        </ul>
+      </div>
+      <div class="stage-prompt-block">
+        <div class="label">After Stage II (Aqueduct)</div>
+        <ul>
+          <li><em>The aqueduct in the picture has 150 arches. If they built ten more, how would they write it?</em> (CLX.)</li>
+          <li><em>What does "century" mean? What about "cent"?</em> (Ties C to vocabulary they already know.)</li>
+        </ul>
+      </div>
+      <div class="stage-prompt-block">
+        <div class="label">After Stage III (Colosseum)</div>
+        <ul>
+          <li><em>Why is IV better than IIII?</em> (Easier to tell apart from III at a glance — important when carving in stone.)</li>
+          <li><em>Look at a clock with Roman numerals if you have one — does it use IV or IIII?</em> (Many clock faces actually use IIII for visual symmetry. A fun "rules can have exceptions" moment.)</li>
+        </ul>
+      </div>
+      <div class="stage-prompt-block">
+        <div class="label">After Stage IV (Emperor's Hall)</div>
+        <ul>
+          <li><em>How would you write the year you were born?</em> (E.g., 2017 = MMXVII.)</li>
+          <li><em>Where have you seen Roman numerals in real life?</em> (Movie credits, Super Bowls, book chapters, clocks, monuments.)</li>
+        </ul>
+      </div>
+      <div class="stage-prompt-block">
+        <div class="label">After the Final Scroll</div>
+        <ul>
+          <li><em>Now you can read the year on any old building or movie. What's a place we could go look for Roman numerals?</em></li>
+        </ul>
+      </div>
+
+      <h2>Common stumbles to watch for</h2>
+      <p>Three small things that trip up most kids in this age range:</p>
+      <ol>
+        <li><strong>Forgetting that subtraction is only ONE pair.</strong> Kids sometimes read XII as "10 − 1 − 1" because they remember "subtract" but not "smaller before bigger." Reinforce that the <em>position</em> (before vs. after) is what flips the operation.</li>
+        <li><strong>Wanting to use IIII for 4 or VIIII for 9.</strong> This is a reasonable instinct that the game gently corrects in Stage III. Tell them they'd be right for <em>very</em> old Romans, but the standard now is IV and IX.</li>
+        <li><strong>Stacking too many of the same letter.</strong> XXXX or VV are not valid. The rule of thumb: never repeat I, X, C, or M more than three times; never repeat V, L, or D at all (those are already half-values, so two V's would just be X). The game doesn't drill this directly, but it never shows invalid forms.</li>
+      </ol>
+
+      <h2>Extension ideas</h2>
+      <p>If your kid wants more after finishing:</p>
+      <ul>
+        <li><strong>Print the cheat sheet</strong> (linked from the home page). It has 16 mixed practice problems with an answer key — perfect for a car ride or a five-minute warm-up.</li>
+        <li><strong>Roman numeral year hunt.</strong> Walk around your neighborhood (or any old downtown) and look for cornerstones, plaques, or building dates. Bring a notebook.</li>
+        <li><strong>Movie credits scavenger hunt.</strong> Pause the credits at the end of any film and find the copyright year. Read it together.</li>
+        <li><strong>Build them with sticks.</strong> For tactile learners, try forming numerals out of toothpicks, popsicle sticks, or even drawing them in sand.</li>
+        <li><strong>Roman addition puzzles.</strong> Give them two numerals (e.g., XIV + XXII) and have them convert, add, and convert back.</li>
+        <li><strong>Bigger numbers.</strong> Romans used a bar over a numeral to multiply by 1,000 (so V̄ = 5,000). This isn't in the game, but it's a fun "next step" if they've mastered the basics.</li>
+      </ul>
+
+      <h2>A note on the game's tech</h2>
+      <p>The game is a single HTML file that runs entirely in a browser. No internet is needed after the first time it loads (it caches the fonts). It saves your child's progress in their browser, so closing the tab won't lose their place — but be aware that "clear browsing data" will reset progress, and progress doesn't sync between devices. If multiple kids will play on the same computer, each one will need to finish their playthrough or click "Start Over" before the next.</p>
+      <p>If your child finishes and asks for more — or if you'd like to see other stages added (medieval clocks, modern uses, harder challenges) — those are listed as next-step ideas in the project documentation.</p>
+
+      <div class="footer-note">— Ave Roma · Ave Marcus —</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  // Soft password gate. NOT real cryptographic protection — anyone who opens
+  // browser DevTools can find this string. Sufficient for casual deterrence
+  // (e.g. preventing kids from idly clicking into the parent guide).
+  // For real privacy, deploy behind Cloudflare Access or similar.
+  var PASSWORD = "semperubisububi";
+
+  var gate = document.getElementById("gate");
+  var content = document.getElementById("content");
+  var form = document.getElementById("gate-form");
+  var input = document.getElementById("gate-input");
+  var error = document.getElementById("gate-error");
+
+  function unlock() {
+    gate.style.display = "none";
+    content.classList.add("unlocked");
+    // Remember the unlock for this tab session (so a parent doesn't have
+    // to re-enter on reload). Per-tab only, not persistent across closes.
+    try { sessionStorage.setItem("marcus-parent-unlocked", "1"); } catch (e) {}
+  }
+
+  // Auto-unlock if already entered this session.
+  try {
+    if (sessionStorage.getItem("marcus-parent-unlocked") === "1") {
+      unlock();
+    }
+  } catch (e) {}
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var entered = (input.value || "").trim().toLowerCase();
+    if (entered === PASSWORD) {
+      error.style.display = "none";
+      unlock();
+    } else {
+      error.style.display = "block";
+      input.value = "";
+      input.focus();
+    }
+  });
+})();
+</script>
+</body>
+</html>
