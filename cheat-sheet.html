@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roman Numerals — Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Lora:ital,wght@0,400;0,400;0,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #FAF1DC;
+    --parchment-dark: #E8D4A8;
+    --ink: #2A1C0C;
+    --ink-light: #6B4F35;
+    --wine: #7A2E1F;
+    --gold-dark: #A87F35;
+    --laurel: #5C7C4E;
+    --stone: #B8A984;
+    --stone-dark: #8A7B5C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--parchment); }
+  body {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    line-height: 1.45;
+    padding: 24px;
+    max-width: 8.5in;
+    margin: 0 auto;
+  }
+  .display { font-family: 'Cinzel', 'Trajan Pro', 'Times New Roman', serif; }
+  /* HEADER */
+  header {
+    text-align: center;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--wine);
+    letter-spacing: 0.06em;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--ink-light);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--wine);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--stone);
+    padding-bottom: 4px;
+    margin: 16px 0 10px;
+  }
+  /* SYMBOLS GRID */
+  .symbols {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .sym-card {
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    padding: 8px 4px;
+    text-align: center;
+    background: var(--parchment-dark);
+  }
+  .sym-card .letter {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--wine);
+    line-height: 1;
+  }
+  .sym-card .value {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+  .sym-card .hook {
+    font-size: 9.5px;
+    color: var(--ink-light);
+    margin-top: 4px;
+    line-height: 1.3;
+    font-style: italic;
+  }
+  /* RULES */
+  .rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .rule-card {
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    padding: 10px 12px;
+    background: #fff;
+  }
+  .rule-card.add { border-left-width: 5px; border-left-color: var(--laurel); }
+  .rule-card.sub { border-left-width: 5px; border-left-color: var(--wine); }
+  .rule-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--wine);
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .rule-text { font-size: 13px; line-height: 1.5; }
+  .rule-example {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--parchment-dark);
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-top: 6px;
+    text-align: center;
+    font-size: 13px;
+  }
+  /* WORKED EXAMPLE */
+  .worked {
+    background: var(--parchment-dark);
+    border: 1px solid var(--stone);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .worked-numeral {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--wine);
+    text-align: center;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .worked-step {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--stone-dark);
+    padding: 2px 0;
+  }
+  .worked-step:last-child {
+    border-bottom: none;
+    font-weight: 700;
+    color: var(--wine);
+    font-size: 14px;
+    padding-top: 5px;
+  }
+  .worked-step .calc { font-family: 'Cinzel', serif; }
+  /* PRACTICE */
+  .practice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .practice-col h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--wine);
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .practice-list { list-style: none; }
+  .practice-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--stone-dark);
+    font-size: 13px;
+  }
+  .practice-list .q-text {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .practice-list .blank {
+    font-family: 'Lora', serif;
+    color: var(--stone-dark);
+    flex-grow: 1;
+    border-bottom: 1px solid var(--ink-light);
+    margin: 0 8px;
+    height: 14px;
+  }
+  .practice-list .num {
+    color: var(--ink-light);
+    font-size: 11px;
+    width: 18px;
+  }
+  /* ANSWER KEY */
+  .answer-key {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--stone-dark);
+    font-size: 9.5px;
+    color: var(--ink-light);
+    line-height: 1.5;
+    text-align: center;
+  }
+  .answer-key strong {
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .answer-key .key-block {
+    display: inline-block;
+    margin: 0 8px;
+    font-family: 'Cinzel', serif;
+  }
+  /* FOOTER */
+  footer {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+  /* PRINT */
+  @media print {
+    @page { margin: 0.5in; size: letter; }
+    body { padding: 0; max-width: none; background: white; }
+    html, body { background: white; }
+    .sym-card { background: white; border-color: #000; }
+    .worked { background: #f5f5f5; }
+    .rule-card { box-shadow: none; }
+    h1 { color: #000; }
+    h2 { color: #000; border-bottom-color: #000; }
+    .rule-title, .practice-col h3 { color: #000; }
+    .sym-card .letter, .worked-numeral, .practice-list .q-text { color: #000; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Roman Numerals — Quick Reference</h1>
+  <div class="subtitle">A companion to <em>Marcus and the Lost Scroll</em></div>
+</header>
+
+<h2>The Seven Symbols</h2>
+<div class="symbols">
+  <div class="sym-card">
+    <div class="letter">I</div>
+    <div class="value">1</div>
+    <div class="hook">A tally mark</div>
+  </div>
+  <div class="sym-card">
+    <div class="letter">V</div>
+    <div class="value">5</div>
+    <div class="hook">An open hand</div>
+  </div>
+  <div class="sym-card">
+    <div class="letter">X</div>
+    <div class="value">10</div>
+    <div class="hook">Two V's = 10 fingers</div>
+  </div>
+  <div class="sym-card">
+    <div class="letter">L</div>
+    <div class="value">50</div>
+    <div class="hook">An old arrow shape</div>
+  </div>
+  <div class="sym-card">
+    <div class="letter">C</div>
+    <div class="value">100</div>
+    <div class="hook">C for <em>Centum</em></div>
+  </div>
+  <div class="sym-card">
+    <div class="letter">D</div>
+    <div class="value">500</div>
+    <div class="hook">Half of 1000</div>
+  </div>
+  <div class="sym-card">
+    <div class="letter">M</div>
+    <div class="value">1000</div>
+    <div class="hook">M for <em>Mille</em></div>
+  </div>
+</div>
+
+<h2>The Two Rules</h2>
+<div class="rules">
+  <div class="rule-card add">
+    <div class="rule-title">⊕ The Adding Rule</div>
+    <div class="rule-text">When a smaller numeral comes <strong>after</strong> a bigger one, <strong>add</strong> them. Bigger first, smaller after.</div>
+    <div class="rule-example">VIII = 5 + 1 + 1 + 1 = 8</div>
+  </div>
+  <div class="rule-card sub">
+    <div class="rule-title">⊖ The Subtracting Trick</div>
+    <div class="rule-text">When a smaller numeral comes <strong>before</strong> a bigger one, <strong>subtract</strong> the small from the big.</div>
+    <div class="rule-example">IX = 10 − 1 = 9</div>
+  </div>
+</div>
+<div style="font-size:11.5px; color: var(--ink-light); text-align:center; margin: 6px 0 0; font-style:italic;">
+  Only these six subtraction pairs exist: <span class="display" style="font-weight:700; color: var(--wine)">IV (4) · IX (9) · XL (40) · XC (90) · CD (400) · CM (900)</span>
+</div>
+
+<h2>Decoding a Long Numeral</h2>
+<div class="worked">
+  <div class="worked-numeral">MCMLXXXIV</div>
+  <div class="worked-step"><span>Break it into chunks:</span><span class="calc">M · CM · LXXX · IV</span></div>
+  <div class="worked-step"><span>M is just M:</span><span class="calc">1000</span></div>
+  <div class="worked-step"><span>CM = C before M (subtract):</span><span class="calc">1000 − 100 = 900</span></div>
+  <div class="worked-step"><span>LXXX = L + X + X + X (add):</span><span class="calc">50 + 10 + 10 + 10 = 80</span></div>
+  <div class="worked-step"><span>IV = I before V (subtract):</span><span class="calc">5 − 1 = 4</span></div>
+  <div class="worked-step"><span>Add it all up:</span><span class="calc">1000 + 900 + 80 + 4 = 1984</span></div>
+</div>
+
+<h2>Try It Yourself</h2>
+<div class="practice">
+  <div class="practice-col">
+    <h3>Read the numeral → write the number</h3>
+    <ul class="practice-list">
+      <li><span class="num">1.</span><span class="q-text">VII</span><span class="blank"></span></li>
+      <li><span class="num">2.</span><span class="q-text">XIV</span><span class="blank"></span></li>
+      <li><span class="num">3.</span><span class="q-text">XXIX</span><span class="blank"></span></li>
+      <li><span class="num">4.</span><span class="q-text">LXII</span><span class="blank"></span></li>
+      <li><span class="num">5.</span><span class="q-text">XCIV</span><span class="blank"></span></li>
+      <li><span class="num">6.</span><span class="q-text">CDLV</span><span class="blank"></span></li>
+      <li><span class="num">7.</span><span class="q-text">DCC</span><span class="blank"></span></li>
+      <li><span class="num">8.</span><span class="q-text">MCMXLII</span><span class="blank"></span></li>
+    </ul>
+  </div>
+  <div class="practice-col">
+    <h3>Read the number → write the numeral</h3>
+    <ul class="practice-list">
+      <li><span class="num">9.</span><span class="q-text">8</span><span class="blank"></span></li>
+      <li><span class="num">10.</span><span class="q-text">19</span><span class="blank"></span></li>
+      <li><span class="num">11.</span><span class="q-text">40</span><span class="blank"></span></li>
+      <li><span class="num">12.</span><span class="q-text">99</span><span class="blank"></span></li>
+      <li><span class="num">13.</span><span class="q-text">144</span><span class="blank"></span></li>
+      <li><span class="num">14.</span><span class="q-text">500</span><span class="blank"></span></li>
+      <li><span class="num">15.</span><span class="q-text">900</span><span class="blank"></span></li>
+      <li><span class="num">16.</span><span class="q-text">2026</span><span class="blank"></span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="answer-key">
+  <strong>Answer Key</strong>
+  <span class="key-block">1. 7</span>
+  <span class="key-block">2. 14</span>
+  <span class="key-block">3. 29</span>
+  <span class="key-block">4. 62</span>
+  <span class="key-block">5. 94</span>
+  <span class="key-block">6. 455</span>
+  <span class="key-block">7. 700</span>
+  <span class="key-block">8. 1942</span>
+  <br>
+  <span class="key-block">9. VIII</span>
+  <span class="key-block">10. XIX</span>
+  <span class="key-block">11. XL</span>
+  <span class="key-block">12. XCIX</span>
+  <span class="key-block">13. CXLIV</span>
+  <span class="key-block">14. D</span>
+  <span class="key-block">15. CM</span>
+  <span class="key-block">16. MMXXVI</span>
+</div>
+
+<footer>SPQR · Senatus Populusque Romanus · Print, fold, share</footer>
+
+</body>
+</html>
