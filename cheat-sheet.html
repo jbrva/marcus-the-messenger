@@ -239,11 +239,54 @@
     color: var(--ink-light);
     font-style: italic;
   }
+  /* TOP TOOLBAR (hidden when printing) */
+  .top-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .home-link {
+    color: var(--ink-light);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+  .home-link:hover { color: var(--wine); border-color: var(--stone-dark); }
+  .print-btn {
+    background: var(--terracotta);
+    color: var(--parchment-light);
+    border: 1.5px solid var(--wine);
+    border-radius: 3px;
+    padding: 8px 18px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 0 var(--wine);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .print-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 0 var(--wine); }
+  .print-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--wine); }
   /* PRINT */
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { padding: 0; max-width: none; background: white; }
     html, body { background: white; }
+    .no-print { display: none !important; }
     .sym-card { background: white; border-color: #000; }
     .worked { background: #f5f5f5; }
     .rule-card { box-shadow: none; }
@@ -255,6 +298,12 @@
 </style>
 </head>
 <body>
+<div class="top-actions no-print">
+  <a href="index.html" class="home-link">← Back to home</a>
+  <button class="print-btn" onclick="window.print()" type="button" aria-label="Open print dialog to print or save as PDF">
+    <span aria-hidden="true">🖨</span> Print / Save as PDF
+  </button>
+</div>
 <header>
   <h1>Roman Numerals — Quick Reference</h1>
   <div class="subtitle">A companion to <em>Marcus and the Lost Scroll</em></div>
