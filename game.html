@@ -19,9 +19,14 @@
     --laurel: #5C7C4E;
     --laurel-dark: #3F5635;
     --imperial: #5B3E7D;
+    --imperial-dark: #432d5e;
+    --imperial-bg: #E0DCEA;
+    --imperial-bg-light: #EDEBF3;
     --gold: #D4A14A;
     --gold-dark: #A87F35;
     --wine: #7A2E1F;
+    --rose-bg: #F4D5D8;
+    --rose-bg-light: #FBE9EB;
     --stone: #B8A984;
     --stone-dark: #8A7B5C;
   }
@@ -47,7 +52,6 @@
     opacity: 0.35;
     z-index: 0;
   }
-  .display { font-family: 'Cinzel', 'Trajan Pro', 'Times New Roman', serif; letter-spacing: 0.03em; }
   .container {
     max-width: 760px;
     margin: 0 auto;
@@ -74,9 +78,7 @@
     border: 1px solid var(--stone);
     border-radius: 4px;
     padding: 32px 28px;
-    box-shadow:
-      inset 0 0 60px rgba(184, 169, 132, 0.25),
-      0 4px 20px rgba(58, 40, 20, 0.15);
+    box-shadow: inset 0 0 60px rgba(184, 169, 132, 0.25), 0 4px 20px rgba(58, 40, 20, 0.15);
     position: relative;
     min-height: 480px;
   }
@@ -85,12 +87,7 @@
     position: absolute;
     left: 0; right: 0;
     height: 14px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--stone-dark) 0 8px,
-      var(--ink-light) 8px 10px,
-      var(--stone-dark) 10px 18px
-    );
+    background: repeating-linear-gradient(90deg, var(--stone-dark) 0 8px, var(--ink-light) 8px 10px, var(--stone-dark) 10px 18px);
     opacity: 0.6;
   }
   .scroll-card::before { top: -7px; border-radius: 4px 4px 0 0; }
@@ -131,6 +128,43 @@
     white-space: nowrap;
     border: 1px solid var(--gold-dark);
   }
+  .player-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding: 6px 12px;
+    background: var(--parchment-dark);
+    border-radius: 999px;
+    font-size: 12px;
+  }
+  .player-strip .who {
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    letter-spacing: 0.06em;
+  }
+  .player-strip .who .gender-mark {
+    font-size: 14px;
+    margin-right: 4px;
+    vertical-align: -1px;
+  }
+  .player-strip .who.feminine .gender-mark { color: var(--wine); }
+  .player-strip .who.masculine .gender-mark { color: var(--imperial); }
+  .switch-link {
+    color: var(--ink-light);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 3px 8px;
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+  .switch-link:hover { color: var(--wine); border-color: var(--stone-dark); }
   .help-toggle {
     background: transparent;
     border: 1.5px solid var(--stone-dark);
@@ -144,305 +178,213 @@
     transition: all 0.2s;
   }
   .help-toggle:hover { background: var(--gold); color: var(--ink); border-color: var(--gold-dark); }
-  .help-panel {
-    background: var(--parchment-dark);
-    border: 1px dashed var(--stone-dark);
-    border-radius: 4px;
-    padding: 14px;
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
+  .help-panel { background: var(--parchment-dark); border: 1px dashed var(--stone-dark); border-radius: 4px; padding: 14px; margin-bottom: 20px; font-size: 14px; }
   .help-panel-title { font-family: 'Cinzel', serif; font-weight: 700; color: var(--wine); margin-bottom: 8px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
   .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 6px; }
   .help-item { background: var(--parchment-light); border: 1px solid var(--stone); border-radius: 3px; padding: 6px; text-align: center; }
   .help-item .hr { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; color: var(--wine); line-height: 1; }
   .help-item .ha { font-size: 11px; color: var(--ink-light); margin-top: 2px; }
   .scene-illus { display: flex; justify-content: center; margin-bottom: 18px; }
-  .scene-title {
-    font-family: 'Cinzel', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--wine);
-    text-align: center;
-    margin-bottom: 4px;
-    letter-spacing: 0.04em;
-  }
-  .scene-subtitle {
-    font-style: italic;
-    color: var(--ink-light);
-    text-align: center;
-    margin-bottom: 22px;
-    font-size: 15px;
-  }
-  .scene-text {
-    font-size: 16px;
-    line-height: 1.75;
-    margin-bottom: 18px;
-  }
+  .scene-title { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: var(--wine); text-align: center; margin-bottom: 4px; letter-spacing: 0.04em; }
+  .scene-subtitle { font-style: italic; color: var(--ink-light); text-align: center; margin-bottom: 22px; font-size: 15px; }
+  .scene-text { font-size: 16px; line-height: 1.75; margin-bottom: 18px; }
   .scene-text strong { color: var(--wine); }
-  .narration {
-    font-style: italic;
-    color: var(--ink-light);
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .origins {
-    display: grid;
-    gap: 14px;
-    margin: 18px 0;
-  }
-  .origin-card {
-    background: var(--parchment-light);
-    border: 1px solid var(--stone);
-    border-left: 4px solid var(--gold-dark);
-    border-radius: 3px;
-    padding: 14px 16px;
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: 14px;
-    align-items: center;
-  }
-  .origin-symbol {
-    font-family: 'Cinzel', serif;
-    font-size: 44px;
-    font-weight: 700;
-    color: var(--wine);
-    text-align: center;
-    line-height: 1;
-  }
+  .origins { display: grid; gap: 14px; margin: 18px 0; }
+  .origin-card { background: var(--parchment-light); border: 1px solid var(--stone); border-left: 4px solid var(--gold-dark); border-radius: 3px; padding: 14px 16px; display: grid; grid-template-columns: 70px 1fr; gap: 14px; align-items: center; }
+  .origin-symbol { font-family: 'Cinzel', serif; font-size: 44px; font-weight: 700; color: var(--wine); text-align: center; line-height: 1; }
   .origin-symbol .val { display: block; font-size: 12px; color: var(--ink-light); margin-top: 4px; font-weight: 400; letter-spacing: 0.05em; }
   .origin-text { font-size: 14px; line-height: 1.6; }
   .origin-text strong { color: var(--wine); font-weight: 700; }
-  .math-box {
-    background: var(--imperial);
-    color: var(--parchment-light);
-    border-radius: 4px;
-    padding: 16px 18px;
-    margin: 18px 0;
-    font-size: 15px;
-    line-height: 1.7;
-    border: 1px solid #432d5e;
-  }
-  .math-box .label {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-    margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-  .math-example {
-    background: rgba(0,0,0,0.18);
-    padding: 8px 12px;
-    border-radius: 3px;
-    margin-top: 8px;
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    text-align: center;
-  }
-  .examples-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
-    gap: 8px;
-    margin: 16px 0;
-  }
-  .ex-tile {
-    background: var(--parchment-dark);
-    border: 1px solid var(--stone);
-    border-radius: 3px;
-    padding: 10px 6px;
-    text-align: center;
-  }
+  .math-box { background: var(--imperial); color: var(--parchment-light); border-radius: 4px; padding: 16px 18px; margin: 18px 0; font-size: 15px; line-height: 1.7; border: 1px solid var(--imperial-dark); }
+  .math-box .label { font-family: 'Cinzel', serif; font-weight: 700; font-size: 12px; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; }
+  .math-example { background: rgba(0,0,0,0.18); padding: 8px 12px; border-radius: 3px; margin-top: 8px; font-family: 'Cinzel', serif; font-size: 16px; text-align: center; }
+  .examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(85px, 1fr)); gap: 8px; margin: 16px 0; }
+  .ex-tile { background: var(--parchment-dark); border: 1px solid var(--stone); border-radius: 3px; padding: 10px 6px; text-align: center; }
   .ex-tile .er { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: var(--wine); line-height: 1; }
   .ex-tile .ev { font-size: 13px; color: var(--ink-light); margin-top: 4px; }
   .q-counter { font-size: 13px; color: var(--ink-light); text-align: center; font-style: italic; margin-bottom: 8px; }
   .q-prompt { font-size: 16px; text-align: center; margin-bottom: 14px; }
   .q-prompt strong { color: var(--wine); }
-  .q-numeral {
-    font-family: 'Cinzel', serif;
-    font-size: 64px;
-    font-weight: 700;
-    color: var(--wine);
-    text-align: center;
-    letter-spacing: 0.08em;
-    margin: 18px 0 22px;
-    line-height: 1;
-    text-shadow: 0 2px 0 rgba(212, 161, 74, 0.3);
-  }
-  .q-number {
-    font-family: 'Cinzel', serif;
-    font-size: 56px;
-    font-weight: 700;
-    color: var(--imperial);
-    text-align: center;
-    margin: 18px 0 22px;
-    line-height: 1;
-  }
-  .options-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    max-width: 460px;
-    margin: 0 auto;
-  }
-  .option-btn {
-    background: var(--parchment-light);
-    border: 2px solid var(--stone-dark);
-    border-radius: 4px;
-    padding: 14px;
-    font-family: 'Cinzel', serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--wine);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    letter-spacing: 0.04em;
-  }
-  .option-btn:hover:not(:disabled) {
-    background: var(--gold);
-    border-color: var(--gold-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(58, 40, 20, 0.2);
-  }
+  .q-numeral { font-family: 'Cinzel', serif; font-size: 64px; font-weight: 700; color: var(--wine); text-align: center; letter-spacing: 0.08em; margin: 18px 0 22px; line-height: 1; text-shadow: 0 2px 0 rgba(212, 161, 74, 0.3); }
+  .q-number { font-family: 'Cinzel', serif; font-size: 56px; font-weight: 700; color: var(--imperial); text-align: center; margin: 18px 0 22px; line-height: 1; }
+  .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 460px; margin: 0 auto; }
+  .option-btn { background: var(--parchment-light); border: 2px solid var(--stone-dark); border-radius: 4px; padding: 14px; font-family: 'Cinzel', serif; font-size: 18px; font-weight: 500; color: var(--wine); cursor: pointer; transition: all 0.15s ease; letter-spacing: 0.04em; }
+  .option-btn:hover:not(:disabled) { background: var(--gold); border-color: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 3px 8px rgba(58, 40, 20, 0.2); }
   .option-btn:active:not(:disabled) { transform: translateY(0); }
   .option-btn.correct { background: var(--laurel); color: var(--parchment-light); border-color: var(--laurel-dark); }
   .option-btn.wrong { background: var(--terracotta); color: var(--parchment-light); border-color: var(--terracotta-dark); }
   .option-btn:disabled { cursor: default; }
   .option-btn.correct:disabled, .option-btn.wrong:disabled { opacity: 1; }
   .option-btn.dim { opacity: 0.55; }
-  .feedback {
-    text-align: center;
-    margin: 16px 0 4px;
-    font-size: 15px;
-    min-height: 26px;
-    font-weight: 500;
-    line-height: 1.5;
-  }
+  .feedback { text-align: center; margin: 16px 0 4px; font-size: 15px; min-height: 26px; font-weight: 500; line-height: 1.5; }
   .feedback.good { color: var(--laurel-dark); }
   .feedback.bad { color: var(--terracotta-dark); }
-  .feedback .explainer {
-    display: block;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-light);
-    margin-top: 4px;
-    font-weight: 400;
-  }
-  .primary-btn {
-    background: var(--terracotta);
-    color: var(--parchment-light);
-    border: 2px solid var(--wine);
-    border-radius: 4px;
-    padding: 14px 32px;
-    font-family: 'Cinzel', serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    display: block;
-    margin: 22px auto 0;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: all 0.15s ease;
-    box-shadow: 0 3px 0 var(--wine);
-  }
+  .feedback .explainer { display: block; font-style: italic; font-size: 13px; color: var(--ink-light); margin-top: 4px; font-weight: 400; }
+  .primary-btn { background: var(--terracotta); color: var(--parchment-light); border: 2px solid var(--wine); border-radius: 4px; padding: 14px 32px; font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; cursor: pointer; display: block; margin: 22px auto 0; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.15s ease; box-shadow: 0 3px 0 var(--wine); }
   .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--wine); }
   .primary-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--wine); }
-  .restart-btn {
-    background: transparent;
-    color: var(--ink-light);
-    border: 1.5px solid var(--stone-dark);
-    border-radius: 4px;
-    padding: 10px 24px;
-    font-family: 'Cinzel', serif;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    display: block;
-    margin: 10px auto 0;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: all 0.15s ease;
-  }
-  .restart-btn:hover {
-    background: var(--parchment-dark);
-    border-color: var(--ink-light);
-    color: var(--ink);
-  }
-  .resume-note {
-    font-style: italic;
-    color: var(--laurel-dark);
-    text-align: center;
-    margin-top: 14px;
-    font-size: 14px;
-  }
+  .primary-btn:disabled { background: var(--stone); border-color: var(--stone-dark); color: var(--ink-light); cursor: not-allowed; box-shadow: 0 2px 0 var(--stone-dark); transform: none; }
+  .primary-btn.imperial { background: var(--imperial); border-color: var(--imperial-dark); box-shadow: 0 3px 0 var(--imperial-dark); }
+  .primary-btn.imperial:hover { box-shadow: 0 5px 0 var(--imperial-dark); }
+  .primary-btn.danger { background: var(--terracotta-dark); border-color: var(--wine); box-shadow: 0 3px 0 var(--wine); }
+  .restart-btn { background: transparent; color: var(--ink-light); border: 1.5px solid var(--stone-dark); border-radius: 4px; padding: 10px 24px; font-family: 'Cinzel', serif; font-size: 12px; font-weight: 500; cursor: pointer; display: block; margin: 10px auto 0; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.15s ease; }
+  .restart-btn:hover { background: var(--parchment-dark); border-color: var(--ink-light); color: var(--ink); }
+  .resume-note { font-style: italic; color: var(--laurel-dark); text-align: center; margin-top: 14px; font-size: 14px; }
   .badge-row { display: flex; gap: 12px; justify-content: center; margin: 18px 0; flex-wrap: wrap; }
-  .badge {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--parchment-dark);
-    border: 3px solid var(--stone-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    position: relative;
-  }
-  .badge.earned {
-    background: var(--gold);
-    border-color: var(--gold-dark);
-    box-shadow: 0 0 16px rgba(212, 161, 74, 0.5);
-  }
+  .badge { width: 64px; height: 64px; border-radius: 50%; background: var(--parchment-dark); border: 3px solid var(--stone-dark); display: flex; align-items: center; justify-content: center; transition: all 0.3s; position: relative; }
+  .badge.earned { background: var(--gold); border-color: var(--gold-dark); box-shadow: 0 0 16px rgba(212, 161, 74, 0.5); }
   .badge.locked { opacity: 0.4; }
-  .badge .roman {
-    font-family: 'Cinzel', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--wine);
-  }
-  .reward-name {
-    font-family: 'Cinzel', serif;
-    font-size: 18px;
-    color: var(--wine);
-    text-align: center;
-    margin: 8px 0;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-  .victory-banner {
-    text-align: center;
-    margin: 16px 0 24px;
-  }
-  .victory-banner h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 36px;
-    color: var(--wine);
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-  }
-  .victory-final-score {
-    font-family: 'Cinzel', serif;
-    font-size: 22px;
-    color: var(--imperial);
-    font-weight: 500;
-    margin: 14px 0;
-  }
-  .qtype-chip {
-    display: inline-block;
-    background: var(--parchment-dark);
-    border: 1px solid var(--stone);
-    border-radius: 3px;
-    padding: 3px 10px;
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    color: var(--wine);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
+  .badge .roman { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: var(--wine); }
+  .reward-name { font-family: 'Cinzel', serif; font-size: 18px; color: var(--wine); text-align: center; margin: 8px 0; font-weight: 500; letter-spacing: 0.05em; }
+  .victory-banner { text-align: center; margin: 16px 0 24px; }
+  .victory-banner h1 { font-family: 'Cinzel', serif; font-size: 36px; color: var(--wine); font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .victory-final-score { font-family: 'Cinzel', serif; font-size: 22px; color: var(--imperial); font-weight: 500; margin: 14px 0; }
+  .qtype-chip { display: inline-block; background: var(--parchment-dark); border: 1px solid var(--stone); border-radius: 3px; padding: 3px 10px; font-family: 'Cinzel', serif; font-size: 11px; color: var(--wine); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
   .center { text-align: center; }
   .max-w { max-width: 540px; margin-left: auto; margin-right: auto; }
+
+  /* === PLAYER PICKER === */
+  .picker-title { font-family: 'Cinzel', serif; font-size: 22px; color: var(--wine); text-align: center; letter-spacing: 0.06em; margin: 6px 0 4px; }
+  .picker-subtitle { font-style: italic; color: var(--ink-light); text-align: center; margin-bottom: 22px; font-size: 14px; }
+  .player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 18px; }
+  .player-card {
+    position: relative;
+    border: 2px solid var(--stone-dark);
+    border-radius: 5px;
+    padding: 16px 14px 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background: var(--parchment-light);
+    text-align: center;
+  }
+  .player-card.feminine { background: var(--rose-bg-light); border-color: var(--wine); }
+  .player-card.feminine:hover { background: var(--rose-bg); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(122, 46, 31, 0.18); }
+  .player-card.masculine { background: var(--imperial-bg-light); border-color: var(--imperial); }
+  .player-card.masculine:hover { background: var(--imperial-bg); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(91, 62, 125, 0.2); }
+  .player-name {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  .player-card.feminine .player-name { color: var(--wine); }
+  .player-card.masculine .player-name { color: var(--imperial); }
+  .player-name .gender-mark { font-size: 18px; margin-right: 4px; vertical-align: -1px; }
+  .player-stats { font-size: 12px; color: var(--ink-light); margin-bottom: 10px; }
+  .player-stats .badges-mini { display: inline-flex; gap: 3px; margin-right: 8px; vertical-align: -2px; }
+  .player-stats .b-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--parchment-dark); border: 1.5px solid var(--stone-dark); display: inline-block; }
+  .player-stats .b-dot.earned { background: var(--gold); border-color: var(--gold-dark); }
+  .player-stats .last-seen { font-style: italic; }
+  .player-card .delete-btn {
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--stone-dark);
+    color: var(--ink-light);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    padding: 0;
+  }
+  .player-card .delete-btn:hover { background: var(--terracotta); border-color: var(--wine); color: white; }
+  .add-player-card {
+    border: 2px dashed var(--stone-dark);
+    border-radius: 5px;
+    padding: 28px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: transparent;
+    text-align: center;
+    color: var(--ink-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 130px;
+  }
+  .add-player-card:hover { border-color: var(--wine); color: var(--wine); background: var(--parchment-dark); }
+  .add-player-card .plus { font-size: 32px; line-height: 1; margin-bottom: 6px; font-family: 'Cinzel', serif; font-weight: 400; }
+  .add-player-card .add-label { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* === CREATE PLAYER === */
+  .create-form { max-width: 580px; margin: 0 auto; }
+  .field-label { font-family: 'Cinzel', serif; font-size: 12px; color: var(--wine); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .name-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--stone-dark);
+    border-radius: 4px;
+    background: var(--parchment);
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+  }
+  .name-input:focus { outline: none; border-color: var(--wine); box-shadow: 0 0 0 3px rgba(122, 46, 31, 0.18); }
+  .or-divider { text-align: center; color: var(--ink-light); font-style: italic; margin: 6px 0 12px; font-size: 13px; }
+  .name-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .name-col { padding: 12px; border-radius: 5px; }
+  .name-col.feminine { background: var(--rose-bg-light); border: 1.5px solid var(--wine); }
+  .name-col.masculine { background: var(--imperial-bg-light); border: 1.5px solid var(--imperial); }
+  .name-col-header { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
+  .name-col.feminine .name-col-header { color: var(--wine); }
+  .name-col.masculine .name-col-header { color: var(--imperial); }
+  .name-col-header .gender-mark { font-size: 16px; margin-right: 6px; vertical-align: -1px; }
+  .name-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .name-tile {
+    padding: 8px 4px;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1.5px solid transparent;
+    transition: all 0.12s ease;
+    letter-spacing: 0.03em;
+  }
+  .name-col.feminine .name-tile { background: white; color: var(--wine); border-color: rgba(122, 46, 31, 0.3); }
+  .name-col.feminine .name-tile:hover { background: var(--rose-bg); border-color: var(--wine); }
+  .name-col.feminine .name-tile.selected { background: var(--wine); color: white; border-color: var(--wine); }
+  .name-col.masculine .name-tile { background: white; color: var(--imperial); border-color: rgba(91, 62, 125, 0.3); }
+  .name-col.masculine .name-tile:hover { background: var(--imperial-bg); border-color: var(--imperial); }
+  .name-col.masculine .name-tile.selected { background: var(--imperial); color: white; border-color: var(--imperial); }
+  .create-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+
+  /* === DELETE CAPTCHA MODAL === */
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(58, 40, 20, 0.55); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .modal-card { background: var(--parchment-light); border: 1px solid var(--stone); border-left: 5px solid var(--terracotta); border-radius: 4px; padding: 28px 24px 20px; max-width: 440px; width: 100%; box-shadow: 0 12px 40px rgba(58, 40, 20, 0.4); }
+  .modal-card h3 { font-family: 'Cinzel', serif; font-size: 20px; color: var(--wine); margin-bottom: 8px; letter-spacing: 0.04em; }
+  .modal-card .modal-sub { font-size: 14px; color: var(--ink-light); margin-bottom: 16px; line-height: 1.55; }
+  .captcha-problem { font-family: 'Cinzel', serif; font-size: 38px; font-weight: 700; color: var(--wine); text-align: center; letter-spacing: 0.08em; margin: 14px 0; padding: 14px; background: var(--parchment-dark); border-radius: 4px; }
+  .captcha-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--stone-dark);
+    border-radius: 4px;
+    background: white;
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+  .captcha-input:focus { outline: none; border-color: var(--wine); box-shadow: 0 0 0 3px rgba(122, 46, 31, 0.18); }
+  .captcha-hint { font-size: 11px; color: var(--ink-light); text-align: center; margin-top: 6px; font-style: italic; }
+  .captcha-error { color: var(--terracotta-dark); font-size: 13px; text-align: center; margin-top: 10px; min-height: 18px; font-weight: 500; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; margin-top: 14px; }
+  .modal-actions button { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 22px; border-radius: 4px; cursor: pointer; transition: all 0.15s; font-weight: 700; }
+  .modal-cancel { background: transparent; color: var(--ink-light); border: 1.5px solid var(--stone-dark); }
+  .modal-cancel:hover { background: var(--parchment-dark); color: var(--ink); border-color: var(--ink-light); }
+  .modal-confirm { background: var(--terracotta-dark); color: white; border: 1.5px solid var(--wine); box-shadow: 0 2px 0 var(--wine); }
+  .modal-confirm:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 3px 0 var(--wine); }
+  .modal-confirm:disabled { background: var(--stone); border-color: var(--stone-dark); cursor: not-allowed; box-shadow: 0 2px 0 var(--stone-dark); }
 </style>
 </head>
 <body>
@@ -452,32 +394,21 @@
     <div id="content"></div>
   </div>
 </div>
+<div id="modal-root"></div>
 <script>
 "use strict";
+
+/* ============== STATIC DATA (game content) ============== */
 const STAGES = [
-  {
-    id: "forum",
-    name: "The Forum",
-    rewardName: "The Scribe's Quill",
-    rewardLetter: "I",
-    illus: "forum",
+  { id: "forum", name: "The Forum", rewardName: "The Scribe's Quill", rewardLetter: "I", illus: "forum",
     story: "Marcus, a young messenger boy, dashes through the noisy Forum at dawn. Vendors shout, senators argue, and pigeons scatter. Suddenly, a merchant drops a scroll covered in strange marks! An old scribe with a long white beard picks it up. \"Aha,\" he says, smiling at Marcus. \"These are <strong>Roman numerals</strong>. Learn the first three and you can begin to read.\"",
     origins: [
       { sym: "I", val: 1, text: "<strong>I is just a tally mark</strong> — a single notch on a stick. Long before Romans wrote on scrolls, shepherds counted their sheep by carving one line for each animal. One sheep, one line. That tradition became the numeral I." },
       { sym: "V", val: 5, text: "<strong>V is the shape of an open hand</strong>. Hold up your hand with your thumb sticking out — the space between your thumb and pointer finger makes a V! Romans used V for five because we have five fingers on each hand." },
       { sym: "X", val: 10, text: "<strong>X is two V's together</strong> — one right-side up, one upside down. Two hands make ten fingers, and two V's stacked make an X. Some scholars also think X comes from shepherds who would cross out every tenth tally mark to make counting easier." }
     ],
-    math: {
-      label: "The Adding Rule",
-      text: "When numerals are written together, you simply <strong>add them up</strong>. The bigger ones go first, then smaller ones follow.",
-      example: "VIII = V + I + I + I = 5 + 1 + 1 + 1 = 8"
-    },
-    examples: [
-      {n: "I", v: 1}, {n: "II", v: 2}, {n: "III", v: 3},
-      {n: "V", v: 5}, {n: "VI", v: 6}, {n: "VII", v: 7},
-      {n: "VIII", v: 8}, {n: "X", v: 10}, {n: "XI", v: 11},
-      {n: "XII", v: 12}, {n: "XIII", v: 13}, {n: "XV", v: 15}
-    ],
+    math: { label: "The Adding Rule", text: "When numerals are written together, you simply <strong>add them up</strong>. The bigger ones go first, then smaller ones follow.", example: "VIII = V + I + I + I = 5 + 1 + 1 + 1 = 8" },
+    examples: [{n:"I",v:1},{n:"II",v:2},{n:"III",v:3},{n:"V",v:5},{n:"VI",v:6},{n:"VII",v:7},{n:"VIII",v:8},{n:"X",v:10},{n:"XI",v:11},{n:"XII",v:12},{n:"XIII",v:13},{n:"XV",v:15}],
     questions: [
       { type: "read", prompt: "What number is this?", numeral: "VII", answer: 7, options: [2, 7, 12, 17], explain: "V (5) + I (1) + I (1) = 7." },
       { type: "write", prompt: "Which numeral means <strong>8</strong>?", number: 8, answer: "VIII", options: ["IIIV", "VIII", "IIX", "IXII"], explain: "VIII = V (5) + I + I + I (3 more) = 8." },
@@ -486,27 +417,14 @@ const STAGES = [
       { type: "story", prompt: "A Roman soldier guards <strong>XV</strong> doorways. How many doorways?", numeral: "XV", answer: 15, options: [10, 15, 16, 25], explain: "X (10) + V (5) = 15." }
     ]
   },
-  {
-    id: "aqueduct",
-    name: "The Great Aqueduct",
-    rewardName: "The Engineer's Chisel",
-    rewardLetter: "II",
-    illus: "aqueduct",
+  { id: "aqueduct", name: "The Great Aqueduct", rewardName: "The Engineer's Chisel", rewardLetter: "II", illus: "aqueduct",
     story: "Marcus climbs the great stone aqueduct that brings water to Rome. The chief engineer, a tall woman with a measuring rope, points to a tally board carved into the stone. \"For bigger numbers we need new symbols,\" she explains. \"Help me check the count of arches and we'll send you on your way.\"",
     origins: [
       { sym: "L", val: 50, text: "<strong>L came from an old arrow shape</strong>. The original symbol for 50 looked a bit like a downward arrow (↓). Over many years of writing on stone and parchment, scribes simplified it into the shape we now call L." },
       { sym: "C", val: 100, text: "<strong>C is for centum</strong> — the Latin word for one hundred! That's the same root that gives us \"<em>century</em>\" (100 years) and \"<em>cent</em>\" (1/100 of a dollar). Easy to remember: C for Century, C for 100." }
     ],
-    math: {
-      label: "The Adding Rule (still!)",
-      text: "Same rule as before — just add the values together, biggest to smallest.",
-      example: "CLXX = C (100) + L (50) + X (10) + X (10) = 170"
-    },
-    examples: [
-      {n: "L", v: 50}, {n: "LX", v: 60}, {n: "LXX", v: 70},
-      {n: "LXXX", v: 80}, {n: "C", v: 100}, {n: "CX", v: 110},
-      {n: "CL", v: 150}, {n: "CC", v: 200}, {n: "CCC", v: 300}
-    ],
+    math: { label: "The Adding Rule (still!)", text: "Same rule as before — just add the values together, biggest to smallest.", example: "CLXX = C (100) + L (50) + X (10) + X (10) = 170" },
+    examples: [{n:"L",v:50},{n:"LX",v:60},{n:"LXX",v:70},{n:"LXXX",v:80},{n:"C",v:100},{n:"CX",v:110},{n:"CL",v:150},{n:"CC",v:200},{n:"CCC",v:300}],
     questions: [
       { type: "read", prompt: "What number is this?", numeral: "LX", answer: 60, options: [40, 51, 60, 110], explain: "L (50) + X (10) = 60." },
       { type: "write", prompt: "Which numeral means <strong>70</strong>?", number: 70, answer: "LXX", options: ["LXX", "LVV", "XXL", "VVL"], explain: "L (50) + X + X (20 more) = 70." },
@@ -515,27 +433,14 @@ const STAGES = [
       { type: "story", prompt: "A general commands <strong>CCCXXX</strong> soldiers. How many?", numeral: "CCCXXX", answer: 330, options: [333, 303, 330, 363], explain: "C + C + C (300) + X + X + X (30) = 330." }
     ]
   },
-  {
-    id: "colosseum",
-    name: "The Colosseum",
-    rewardName: "The Gladiator's Helm",
-    rewardLetter: "III",
-    illus: "colosseum",
+  { id: "colosseum", name: "The Colosseum", rewardName: "The Gladiator's Helm", rewardLetter: "III", illus: "colosseum",
     story: "Marcus enters the roaring Colosseum. The crowd cheers, sand swirls, and the scoreboard glows: IV. IX. XL. \"That's strange,\" Marcus thinks. \"I see a small letter <em>before</em> a bigger one!\" A grizzled trainer leans over the rail and grins. \"Ah, that's the gladiator's trick, boy. When a smaller numeral comes <strong>before</strong> a bigger one, you <strong>subtract</strong> it.\"",
     origins: [
       { sym: "IV", val: 4, text: "<strong>The shortcut.</strong> Long ago, Romans wrote 4 as IIII (four tallies). Later they decided IV — <em>one before five</em> — was easier to read. Same idea for IX: <em>one before ten</em> means 9. This trick saves space and looks cleaner." },
       { sym: "XL", val: 40, text: "<strong>The same trick scales up.</strong> XL means \"<em>ten before fifty</em>\" — that's 50 minus 10, which equals 40. XC means \"<em>ten before one hundred</em>\" — that's 90." }
     ],
-    math: {
-      label: "The Subtracting Trick",
-      text: "If a <strong>smaller</strong> numeral comes <strong>before</strong> a bigger one, subtract it. If it comes <strong>after</strong>, add it.",
-      example: "XIV = X (10) + IV (4) = 14   ⚔   XIX = X (10) + IX (9) = 19"
-    },
-    examples: [
-      {n: "IV", v: 4}, {n: "IX", v: 9}, {n: "XIV", v: 14},
-      {n: "XIX", v: 19}, {n: "XL", v: 40}, {n: "XLV", v: 45},
-      {n: "XLIX", v: 49}, {n: "XC", v: 90}, {n: "XCIX", v: 99}
-    ],
+    math: { label: "The Subtracting Trick", text: "If a <strong>smaller</strong> numeral comes <strong>before</strong> a bigger one, subtract it. If it comes <strong>after</strong>, add it.", example: "XIV = X (10) + IV (4) = 14   ⚔   XIX = X (10) + IX (9) = 19" },
+    examples: [{n:"IV",v:4},{n:"IX",v:9},{n:"XIV",v:14},{n:"XIX",v:19},{n:"XL",v:40},{n:"XLV",v:45},{n:"XLIX",v:49},{n:"XC",v:90},{n:"XCIX",v:99}],
     questions: [
       { type: "read", prompt: "What number is this?", numeral: "IX", answer: 9, options: [11, 9, 6, 19], explain: "I before X means \"one before ten\" = 10 − 1 = 9." },
       { type: "write", prompt: "Which numeral means <strong>14</strong>?", number: 14, answer: "XIV", options: ["XIIII", "XIV", "VIX", "IVX"], explain: "X (10) + IV (4) = 14. Romans used IV instead of IIII." },
@@ -545,28 +450,15 @@ const STAGES = [
       { type: "math", prompt: "What is <strong>XX + IV</strong>?", numeral: "XX + IV", answer: 24, options: [16, 24, 26, 224], explain: "XX (20) + IV (4) = 24. That's XXIV in Roman numerals." }
     ]
   },
-  {
-    id: "hall",
-    name: "The Emperor's Hall",
-    rewardName: "The Emperor's Seal",
-    rewardLetter: "IV",
-    illus: "hall",
+  { id: "hall", name: "The Emperor's Hall", rewardName: "The Emperor's Seal", rewardLetter: "IV", illus: "hall",
     story: "Marcus is finally summoned to the Emperor's Hall. Tall marble columns rise to a golden ceiling. Massive inscriptions are carved into the walls — full of letters Marcus has never seen. The herald, in a flowing red cloak, nods at him. \"For the greatest numbers, young messenger, we use <strong>D</strong> and <strong>M</strong>. Read these inscriptions, and the Emperor will receive your scroll.\"",
     origins: [
       { sym: "D", val: 500, text: "<strong>D is half of 1000.</strong> The very old symbol for 1000 looked like Φ or CIƆ. When scribes split that symbol in half, they got something that looked like D — and half of a thousand is <strong>five hundred</strong>!" },
       { sym: "M", val: 1000, text: "<strong>M is for mille</strong> — the Latin word for one thousand! That's the same root as \"<em>millennium</em>\" (1,000 years) and \"<em>millimeter</em>\" (1/1000 of a meter). Easy to remember: M for Mille, M for 1000." },
       { sym: "CM", val: 900, text: "<strong>And the subtracting trick still works!</strong> CM means \"<em>one hundred before one thousand</em>\" — that's 1000 − 100 = 900. CD means \"<em>one hundred before five hundred</em>\" — that's 400." }
     ],
-    math: {
-      label: "All Rules Together",
-      text: "Add when smaller is after bigger. Subtract when smaller is before bigger.",
-      example: "MCM = M (1000) + CM (900) = 1900"
-    },
-    examples: [
-      {n: "D", v: 500}, {n: "DC", v: 600}, {n: "DCC", v: 700},
-      {n: "CD", v: 400}, {n: "CM", v: 900}, {n: "M", v: 1000},
-      {n: "MD", v: 1500}, {n: "MCM", v: 1900}, {n: "MM", v: 2000}
-    ],
+    math: { label: "All Rules Together", text: "Add when smaller is after bigger. Subtract when smaller is before bigger.", example: "MCM = M (1000) + CM (900) = 1900" },
+    examples: [{n:"D",v:500},{n:"DC",v:600},{n:"DCC",v:700},{n:"CD",v:400},{n:"CM",v:900},{n:"M",v:1000},{n:"MD",v:1500},{n:"MCM",v:1900},{n:"MM",v:2000}],
     questions: [
       { type: "read", prompt: "What number is this?", numeral: "DC", answer: 600, options: [400, 600, 1100, 510], explain: "D (500) + C (100) = 600." },
       { type: "write", prompt: "Which numeral means <strong>900</strong>?", number: 900, answer: "CM", options: ["DCD", "CM", "DCCC", "MC"], explain: "CM means \"100 before 1000\" = 1000 − 100 = 900." },
@@ -586,69 +478,187 @@ const FINAL_CHALLENGE = {
     { type: "read", prompt: "Line V — \"The treasure is hidden at this many paces:\"", numeral: "CMXCIX", answer: 999, options: [999, 1099, 909, 919], explain: "CM (900) + XC (90) + IX (9) = 999. Almost a thousand!" }
   ]
 };
+const FULL_REF = [{n:"I",v:1},{n:"V",v:5},{n:"X",v:10},{n:"L",v:50},{n:"C",v:100},{n:"D",v:500},{n:"M",v:1000}];
+
+/* ============== ROMAN NAMES & CAPTCHA ============== */
+const NAMES_GIRLS = ["Lucia", "Julia", "Octavia", "Livia", "Flavia", "Claudia", "Valeria", "Camilla"];
+const NAMES_BOYS = ["Marcus", "Cassius", "Aurelius", "Cornelius", "Hadrian", "Maximus", "Tiberius", "Quintus"];
+const CAPTCHA_PROBLEMS = [
+  { q: "LX + XV", n: 75, a: "LXXV" },
+  { q: "C − XL", n: 60, a: "LX" },
+  { q: "XL + IX", n: 49, a: "XLIX" },
+  { q: "XXX + XIV", n: 44, a: "XLIV" },
+  { q: "L − XIX", n: 31, a: "XXXI" },
+  { q: "XC − XL", n: 50, a: "L" },
+  { q: "CC + L", n: 250, a: "CCL" },
+  { q: "D + C", n: 600, a: "DC" },
+  { q: "XL + L", n: 90, a: "XC" },
+  { q: "XXIV + XV", n: 39, a: "XXXIX" },
+  { q: "LX − XII", n: 48, a: "XLVIII" },
+  { q: "M − CD", n: 600, a: "DC" },
+  { q: "LXX + XIV", n: 84, a: "LXXXIV" },
+  { q: "CL − XL", n: 110, a: "CX" },
+  { q: "XL + XLIV", n: 84, a: "LXXXIV" }
+];
+
+/* ============== SVG ILLUSTRATIONS ============== */
 function svgIllus(kind) {
-  const PARCH = "#F5E6C8";
-  const STONE = "#B8A984";
-  const STONE_D = "#8A7B5C";
-  const TERRA = "#C8553D";
-  const WINE = "#7A2E1F";
-  const GOLD = "#D4A14A";
-  const LAUREL = "#5C7C4E";
-  const INK = "#3A2814";
-  if (kind === "scroll") {
-    return `<svg width="220" height="120" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Glowing ancient scroll"><ellipse cx="110" cy="60" rx="80" ry="34" fill="${GOLD}" opacity="0.25"/><rect x="38" y="22" width="144" height="76" fill="${PARCH}" stroke="${STONE_D}" stroke-width="1.5" rx="2"/><g stroke="${INK}" stroke-width="1.2" fill="none"><line x1="52" y1="36" x2="170" y2="36"/><line x1="52" y1="48" x2="156" y2="48"/><line x1="52" y1="60" x2="166" y2="60"/><line x1="52" y1="72" x2="148" y2="72"/><line x1="52" y1="84" x2="160" y2="84"/></g><rect x="26" y="14" width="22" height="92" fill="${WINE}" stroke="${INK}" stroke-width="1.5" rx="6"/><rect x="172" y="14" width="22" height="92" fill="${WINE}" stroke="${INK}" stroke-width="1.5" rx="6"/><text x="110" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="16" fill="${WINE}" font-weight="700" letter-spacing="2">MARCUS</text></svg>`;
-  }
-  if (kind === "marcus") {
-    return `<svg width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marcus the young Roman messenger"><ellipse cx="60" cy="134" rx="44" ry="4" fill="${INK}" opacity="0.2"/><circle cx="60" cy="40" r="20" fill="#E8C8A0" stroke="${INK}" stroke-width="1.5"/><path d="M 40 40 Q 40 22 60 22 Q 80 22 80 40 Q 80 28 70 26 Q 60 32 50 26 Q 40 28 40 40 Z" fill="${INK}"/><circle cx="53" cy="42" r="2" fill="${INK}"/><circle cx="67" cy="42" r="2" fill="${INK}"/><path d="M 54 50 Q 60 54 66 50" stroke="${INK}" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M 38 60 L 82 60 L 88 130 L 32 130 Z" fill="${PARCH}" stroke="${INK}" stroke-width="1.5"/><path d="M 38 60 L 82 60 L 84 80 L 36 80 Z" fill="${TERRA}" stroke="${INK}" stroke-width="1.5"/><line x1="50" y1="80" x2="50" y2="128" stroke="${TERRA}" stroke-width="2"/><rect x="78" y="74" width="22" height="6" fill="${WINE}"/><rect x="80" y="68" width="18" height="20" fill="${PARCH}" stroke="${INK}" stroke-width="1.2" rx="1"/><line x1="84" y1="74" x2="94" y2="74" stroke="${INK}" stroke-width="0.8"/><line x1="84" y1="78" x2="92" y2="78" stroke="${INK}" stroke-width="0.8"/><line x1="84" y1="82" x2="94" y2="82" stroke="${INK}" stroke-width="0.8"/></svg>`;
-  }
-  if (kind === "forum") {
-    return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman Forum with columns"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><polygon points="0,18 280,18 252,0 28,0" fill="${WINE}" stroke="${INK}" stroke-width="1.5"/><text x="140" y="13" text-anchor="middle" font-family="Cinzel, serif" font-size="9" fill="${GOLD}" font-weight="700">SPQR</text><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><rect x="20" y="22" width="16" height="88"/><rect x="60" y="22" width="16" height="88"/><rect x="100" y="22" width="16" height="88"/><rect x="140" y="22" width="16" height="88"/><rect x="180" y="22" width="16" height="88"/><rect x="220" y="22" width="16" height="88"/><rect x="260" y="22" width="16" height="88"/><rect x="14" y="18" width="28" height="6"/><rect x="54" y="18" width="28" height="6"/><rect x="94" y="18" width="28" height="6"/><rect x="134" y="18" width="28" height="6"/><rect x="174" y="18" width="28" height="6"/><rect x="214" y="18" width="28" height="6"/><rect x="254" y="18" width="28" height="6"/></g></svg>`;
-  }
-  if (kind === "aqueduct") {
-    return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman aqueduct with arches and water"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><path d="M 12 110 L 12 60 Q 12 36 36 36 L 60 36 Q 84 36 84 60 L 84 110 Z"/><path d="M 96 110 L 96 60 Q 96 36 120 36 L 144 36 Q 168 36 168 60 L 168 110 Z"/><path d="M 180 110 L 180 60 Q 180 36 204 36 L 228 36 Q 252 36 252 60 L 252 110 Z"/></g><rect x="0" y="20" width="280" height="16" fill="${STONE}" stroke="${INK}" stroke-width="1.2"/><rect x="0" y="14" width="280" height="6" fill="#5BA3D8"/></svg>`;
-  }
-  if (kind === "colosseum") {
-    return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman Colosseum amphitheater"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><ellipse cx="140" cy="110" rx="130" ry="50" fill="${PARCH}" stroke="${INK}" stroke-width="1.5"/><ellipse cx="140" cy="80" rx="120" ry="32" fill="none" stroke="${INK}" stroke-width="1"/><ellipse cx="140" cy="92" rx="125" ry="38" fill="none" stroke="${INK}" stroke-width="1"/><g fill="${INK}"><rect x="22" y="78" width="6" height="26"/><rect x="42" y="72" width="6" height="32"/><rect x="62" y="68" width="6" height="36"/><rect x="82" y="64" width="6" height="40"/><rect x="102" y="60" width="6" height="44"/><rect x="122" y="58" width="6" height="46"/><rect x="148" y="58" width="6" height="46"/><rect x="168" y="60" width="6" height="44"/><rect x="188" y="64" width="6" height="40"/><rect x="208" y="68" width="6" height="36"/><rect x="228" y="72" width="6" height="32"/><rect x="248" y="78" width="6" height="26"/></g><rect x="132" y="74" width="16" height="36" fill="${WINE}" stroke="${INK}" stroke-width="1"/><rect x="134" y="76" width="12" height="30" fill="${INK}"/><g fill="${LAUREL}" stroke="${INK}" stroke-width="0.8"><ellipse cx="140" cy="38" rx="34" ry="10" fill="none" stroke-width="1.5"/><ellipse cx="112" cy="38" rx="5" ry="3"/><ellipse cx="120" cy="32" rx="5" ry="3"/><ellipse cx="130" cy="30" rx="5" ry="3"/><ellipse cx="140" cy="28" rx="5" ry="3"/><ellipse cx="150" cy="30" rx="5" ry="3"/><ellipse cx="160" cy="32" rx="5" ry="3"/><ellipse cx="168" cy="38" rx="5" ry="3"/></g><circle cx="140" cy="38" r="5" fill="${TERRA}" stroke="${INK}" stroke-width="1"/></svg>`;
-  }
-  if (kind === "hall") {
-    return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Emperor's marble hall with throne"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><rect x="0" y="0" width="280" height="22" fill="${WINE}" stroke="${INK}" stroke-width="1"/><text x="140" y="15" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="${GOLD}" font-weight="700">SENATVS POPVLVSQVE ROMANVS</text><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><rect x="24" y="26" width="16" height="84"/><rect x="60" y="26" width="16" height="84"/><rect x="204" y="26" width="16" height="84"/><rect x="240" y="26" width="16" height="84"/></g><rect x="120" y="50" width="40" height="60" fill="${GOLD}" stroke="${INK}" stroke-width="1.5"/><rect x="116" y="44" width="48" height="10" fill="${WINE}" stroke="${INK}" stroke-width="1.2"/><rect x="124" y="58" width="32" height="40" fill="${TERRA}"/><circle cx="140" cy="40" r="6" fill="${GOLD}" stroke="${INK}" stroke-width="1"/></svg>`;
-  }
-  if (kind === "trophy") {
-    return `<svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Golden laurel wreath trophy"><ellipse cx="50" cy="115" rx="36" ry="3" fill="${INK}" opacity="0.25"/><rect x="44" y="92" width="12" height="20" fill="${GOLD}" stroke="${INK}" stroke-width="1.2"/><rect x="36" y="108" width="28" height="6" fill="${GOLD}" stroke="${INK}" stroke-width="1.2"/><ellipse cx="50" cy="60" rx="38" ry="38" fill="none" stroke="${LAUREL}" stroke-width="3"/><g fill="${LAUREL}" stroke="${INK}" stroke-width="0.8"><ellipse cx="14" cy="60" rx="7" ry="4" transform="rotate(-30 14 60)"/><ellipse cx="20" cy="42" rx="7" ry="4" transform="rotate(-50 20 42)"/><ellipse cx="32" cy="28" rx="7" ry="4" transform="rotate(-70 32 28)"/><ellipse cx="50" cy="22" rx="7" ry="4"/><ellipse cx="68" cy="28" rx="7" ry="4" transform="rotate(70 68 28)"/><ellipse cx="80" cy="42" rx="7" ry="4" transform="rotate(50 80 42)"/><ellipse cx="86" cy="60" rx="7" ry="4" transform="rotate(30 86 60)"/><ellipse cx="80" cy="78" rx="7" ry="4" transform="rotate(-30 80 78)"/><ellipse cx="20" cy="78" rx="7" ry="4" transform="rotate(30 20 78)"/></g><text x="50" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="22" fill="${WINE}" font-weight="700">SPQR</text></svg>`;
-  }
+  const PARCH = "#F5E6C8", STONE = "#B8A984", STONE_D = "#8A7B5C", TERRA = "#C8553D", WINE = "#7A2E1F", GOLD = "#D4A14A", LAUREL = "#5C7C4E", INK = "#3A2814";
+  if (kind === "scroll") return `<svg width="220" height="120" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Glowing ancient scroll"><ellipse cx="110" cy="60" rx="80" ry="34" fill="${GOLD}" opacity="0.25"/><rect x="38" y="22" width="144" height="76" fill="${PARCH}" stroke="${STONE_D}" stroke-width="1.5" rx="2"/><g stroke="${INK}" stroke-width="1.2" fill="none"><line x1="52" y1="36" x2="170" y2="36"/><line x1="52" y1="48" x2="156" y2="48"/><line x1="52" y1="60" x2="166" y2="60"/><line x1="52" y1="72" x2="148" y2="72"/><line x1="52" y1="84" x2="160" y2="84"/></g><rect x="26" y="14" width="22" height="92" fill="${WINE}" stroke="${INK}" stroke-width="1.5" rx="6"/><rect x="172" y="14" width="22" height="92" fill="${WINE}" stroke="${INK}" stroke-width="1.5" rx="6"/><text x="110" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="16" fill="${WINE}" font-weight="700" letter-spacing="2">SPQR</text></svg>`;
+  if (kind === "marcus") return `<svg width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A young Roman messenger"><ellipse cx="60" cy="134" rx="44" ry="4" fill="${INK}" opacity="0.2"/><circle cx="60" cy="40" r="20" fill="#E8C8A0" stroke="${INK}" stroke-width="1.5"/><path d="M 40 40 Q 40 22 60 22 Q 80 22 80 40 Q 80 28 70 26 Q 60 32 50 26 Q 40 28 40 40 Z" fill="${INK}"/><circle cx="53" cy="42" r="2" fill="${INK}"/><circle cx="67" cy="42" r="2" fill="${INK}"/><path d="M 54 50 Q 60 54 66 50" stroke="${INK}" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M 38 60 L 82 60 L 88 130 L 32 130 Z" fill="${PARCH}" stroke="${INK}" stroke-width="1.5"/><path d="M 38 60 L 82 60 L 84 80 L 36 80 Z" fill="${TERRA}" stroke="${INK}" stroke-width="1.5"/><line x1="50" y1="80" x2="50" y2="128" stroke="${TERRA}" stroke-width="2"/><rect x="78" y="74" width="22" height="6" fill="${WINE}"/><rect x="80" y="68" width="18" height="20" fill="${PARCH}" stroke="${INK}" stroke-width="1.2" rx="1"/><line x1="84" y1="74" x2="94" y2="74" stroke="${INK}" stroke-width="0.8"/><line x1="84" y1="78" x2="92" y2="78" stroke="${INK}" stroke-width="0.8"/><line x1="84" y1="82" x2="94" y2="82" stroke="${INK}" stroke-width="0.8"/></svg>`;
+  if (kind === "forum") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman Forum"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><polygon points="0,18 280,18 252,0 28,0" fill="${WINE}" stroke="${INK}" stroke-width="1.5"/><text x="140" y="13" text-anchor="middle" font-family="Cinzel, serif" font-size="9" fill="${GOLD}" font-weight="700">SPQR</text><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><rect x="20" y="22" width="16" height="88"/><rect x="60" y="22" width="16" height="88"/><rect x="100" y="22" width="16" height="88"/><rect x="140" y="22" width="16" height="88"/><rect x="180" y="22" width="16" height="88"/><rect x="220" y="22" width="16" height="88"/><rect x="260" y="22" width="16" height="88"/><rect x="14" y="18" width="28" height="6"/><rect x="54" y="18" width="28" height="6"/><rect x="94" y="18" width="28" height="6"/><rect x="134" y="18" width="28" height="6"/><rect x="174" y="18" width="28" height="6"/><rect x="214" y="18" width="28" height="6"/><rect x="254" y="18" width="28" height="6"/></g></svg>`;
+  if (kind === "aqueduct") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roman aqueduct"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><path d="M 12 110 L 12 60 Q 12 36 36 36 L 60 36 Q 84 36 84 60 L 84 110 Z"/><path d="M 96 110 L 96 60 Q 96 36 120 36 L 144 36 Q 168 36 168 60 L 168 110 Z"/><path d="M 180 110 L 180 60 Q 180 36 204 36 L 228 36 Q 252 36 252 60 L 252 110 Z"/></g><rect x="0" y="20" width="280" height="16" fill="${STONE}" stroke="${INK}" stroke-width="1.2"/><rect x="0" y="14" width="280" height="6" fill="#5BA3D8"/></svg>`;
+  if (kind === "colosseum") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Colosseum"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><ellipse cx="140" cy="110" rx="130" ry="50" fill="${PARCH}" stroke="${INK}" stroke-width="1.5"/><ellipse cx="140" cy="80" rx="120" ry="32" fill="none" stroke="${INK}" stroke-width="1"/><ellipse cx="140" cy="92" rx="125" ry="38" fill="none" stroke="${INK}" stroke-width="1"/><g fill="${INK}"><rect x="22" y="78" width="6" height="26"/><rect x="42" y="72" width="6" height="32"/><rect x="62" y="68" width="6" height="36"/><rect x="82" y="64" width="6" height="40"/><rect x="102" y="60" width="6" height="44"/><rect x="122" y="58" width="6" height="46"/><rect x="148" y="58" width="6" height="46"/><rect x="168" y="60" width="6" height="44"/><rect x="188" y="64" width="6" height="40"/><rect x="208" y="68" width="6" height="36"/><rect x="228" y="72" width="6" height="32"/><rect x="248" y="78" width="6" height="26"/></g><rect x="132" y="74" width="16" height="36" fill="${WINE}" stroke="${INK}" stroke-width="1"/><rect x="134" y="76" width="12" height="30" fill="${INK}"/><g fill="${LAUREL}" stroke="${INK}" stroke-width="0.8"><ellipse cx="140" cy="38" rx="34" ry="10" fill="none" stroke-width="1.5"/><ellipse cx="112" cy="38" rx="5" ry="3"/><ellipse cx="120" cy="32" rx="5" ry="3"/><ellipse cx="130" cy="30" rx="5" ry="3"/><ellipse cx="140" cy="28" rx="5" ry="3"/><ellipse cx="150" cy="30" rx="5" ry="3"/><ellipse cx="160" cy="32" rx="5" ry="3"/><ellipse cx="168" cy="38" rx="5" ry="3"/></g><circle cx="140" cy="38" r="5" fill="${TERRA}" stroke="${INK}" stroke-width="1"/></svg>`;
+  if (kind === "hall") return `<svg width="280" height="130" viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Emperor's hall"><rect x="0" y="110" width="280" height="20" fill="${STONE_D}"/><rect x="0" y="0" width="280" height="22" fill="${WINE}" stroke="${INK}" stroke-width="1"/><text x="140" y="15" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="${GOLD}" font-weight="700">SENATVS POPVLVSQVE ROMANVS</text><g fill="${PARCH}" stroke="${INK}" stroke-width="1.2"><rect x="24" y="26" width="16" height="84"/><rect x="60" y="26" width="16" height="84"/><rect x="204" y="26" width="16" height="84"/><rect x="240" y="26" width="16" height="84"/></g><rect x="120" y="50" width="40" height="60" fill="${GOLD}" stroke="${INK}" stroke-width="1.5"/><rect x="116" y="44" width="48" height="10" fill="${WINE}" stroke="${INK}" stroke-width="1.2"/><rect x="124" y="58" width="32" height="40" fill="${TERRA}"/><circle cx="140" cy="40" r="6" fill="${GOLD}" stroke="${INK}" stroke-width="1"/></svg>`;
+  if (kind === "trophy") return `<svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laurel trophy"><ellipse cx="50" cy="115" rx="36" ry="3" fill="${INK}" opacity="0.25"/><rect x="44" y="92" width="12" height="20" fill="${GOLD}" stroke="${INK}" stroke-width="1.2"/><rect x="36" y="108" width="28" height="6" fill="${GOLD}" stroke="${INK}" stroke-width="1.2"/><ellipse cx="50" cy="60" rx="38" ry="38" fill="none" stroke="${LAUREL}" stroke-width="3"/><g fill="${LAUREL}" stroke="${INK}" stroke-width="0.8"><ellipse cx="14" cy="60" rx="7" ry="4" transform="rotate(-30 14 60)"/><ellipse cx="20" cy="42" rx="7" ry="4" transform="rotate(-50 20 42)"/><ellipse cx="32" cy="28" rx="7" ry="4" transform="rotate(-70 32 28)"/><ellipse cx="50" cy="22" rx="7" ry="4"/><ellipse cx="68" cy="28" rx="7" ry="4" transform="rotate(70 68 28)"/><ellipse cx="80" cy="42" rx="7" ry="4" transform="rotate(50 80 42)"/><ellipse cx="86" cy="60" rx="7" ry="4" transform="rotate(30 86 60)"/><ellipse cx="80" cy="78" rx="7" ry="4" transform="rotate(-30 80 78)"/><ellipse cx="20" cy="78" rx="7" ry="4" transform="rotate(30 20 78)"/></g><text x="50" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="22" fill="${WINE}" font-weight="700">SPQR</text></svg>`;
   return "";
 }
-let state = {
-  screen: "welcome", stage: 0, qIndex: 0, score: 0, totalQuestions: 0,
-  badges: [false, false, false, false],
-  lastSelected: null, lastCorrect: null, showHelp: false, finalQIndex: 0
-};
-const FULL_REF = [{n:"I",v:1},{n:"V",v:5},{n:"X",v:10},{n:"L",v:50},{n:"C",v:100},{n:"D",v:500},{n:"M",v:1000}];
-const SAVE_KEY = "marcus-roman-numerals-v1";
-let resumableSnapshot = null;
-function saveState() {
-  if (state.screen === "welcome" || state.screen === "victory") return;
+
+/* ============== HELPERS: PARSING & UTIL ============== */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+}
+function romanToInt(s) {
+  s = String(s).toUpperCase().trim();
+  if (!/^[IVXLCDM]+$/.test(s)) return NaN;
+  const map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 };
+  let result = 0;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i], next = s[i+1];
+    if (next && map[next] > map[c]) result -= map[c];
+    else result += map[c];
+  }
+  return result;
+}
+function parseAnswer(input) {
+  const trimmed = String(input).trim();
+  if (!trimmed) return NaN;
+  if (/^\d+$/.test(trimmed)) return parseInt(trimmed, 10);
+  if (/^[IVXLCDM]+$/i.test(trimmed)) return romanToInt(trimmed);
+  return NaN;
+}
+function genId() {
+  return "p_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7);
+}
+function totalQuestions() {
+  return STAGES.reduce((acc, s) => acc + s.questions.length, 0) + FINAL_CHALLENGE.questions.length;
+}
+
+/* ============== STORAGE: PLAYERS ============== */
+const PLAYERS_KEY = "marcus-players-v2";
+const ACTIVE_KEY = "marcus-active-player-v2";
+const OLD_SAVE_KEY = "marcus-roman-numerals-v1";
+
+function loadPlayers() {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify({
-      screen: state.screen, stage: state.stage, qIndex: state.qIndex,
-      score: state.score, totalQuestions: state.totalQuestions,
-      badges: state.badges.slice(), finalQIndex: state.finalQIndex,
-      lastSelected: state.lastSelected, lastCorrect: state.lastCorrect
-    }));
+    const raw = localStorage.getItem(PLAYERS_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) { return []; }
+}
+function persistPlayers() {
+  try { localStorage.setItem(PLAYERS_KEY, JSON.stringify(state.players)); } catch (e) {}
+}
+function getActiveId() {
+  try { return localStorage.getItem(ACTIVE_KEY); } catch (e) { return null; }
+}
+function setActiveId(id) {
+  try {
+    if (id) localStorage.setItem(ACTIVE_KEY, id);
+    else localStorage.removeItem(ACTIVE_KEY);
   } catch (e) {}
 }
-function loadSavedState() {
-  try {
-    const raw = localStorage.getItem(SAVE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object" || !parsed.screen) return null;
-    return parsed;
-  } catch (e) { return null; }
+function findPlayer(id) {
+  return state.players.find(p => p.id === id);
 }
-function clearSavedState() { try { localStorage.removeItem(SAVE_KEY); } catch (e) {} }
+function defaultGameState() {
+  return { screen: "welcome", stage: 0, qIndex: 0, score: 0, totalQuestions: totalQuestions(), badges: [false,false,false,false], lastSelected: null, lastCorrect: null, finalQIndex: 0 };
+}
+function migrateOldSave() {
+  // If a v1 save exists and there are no v2 players yet, convert it to a default "Marcus" player.
+  try {
+    const raw = localStorage.getItem(OLD_SAVE_KEY);
+    if (!raw) return;
+    const v2Players = loadPlayers();
+    if (v2Players.length > 0) return; // already migrated
+    const old = JSON.parse(raw);
+    if (!old || typeof old !== "object") return;
+    const player = {
+      id: genId(),
+      name: "Marcus",
+      gender: "boy",
+      gameState: {
+        screen: old.screen || "welcome",
+        stage: old.stage || 0,
+        qIndex: old.qIndex || 0,
+        score: old.score || 0,
+        totalQuestions: old.totalQuestions || totalQuestions(),
+        badges: Array.isArray(old.badges) ? old.badges.slice() : [false,false,false,false],
+        lastSelected: typeof old.lastSelected !== "undefined" ? old.lastSelected : null,
+        lastCorrect: typeof old.lastCorrect !== "undefined" ? old.lastCorrect : null,
+        finalQIndex: old.finalQIndex || 0
+      },
+      lastPlayed: Date.now()
+    };
+    localStorage.setItem(PLAYERS_KEY, JSON.stringify([player]));
+    localStorage.removeItem(OLD_SAVE_KEY);
+  } catch (e) {}
+}
+function persistActivePlayerGameState() {
+  if (!state.activePlayerId) return;
+  const p = findPlayer(state.activePlayerId);
+  if (!p) return;
+  // Pull the in-memory game state into the player record.
+  p.gameState = {
+    screen: state.screen, stage: state.stage, qIndex: state.qIndex, score: state.score,
+    totalQuestions: state.totalQuestions, badges: state.badges.slice(),
+    lastSelected: state.lastSelected, lastCorrect: state.lastCorrect, finalQIndex: state.finalQIndex
+  };
+  p.lastPlayed = Date.now();
+  persistPlayers();
+}
+function loadActivePlayerGameState() {
+  if (!state.activePlayerId) return;
+  const p = findPlayer(state.activePlayerId);
+  if (!p) return;
+  const g = p.gameState || defaultGameState();
+  state.screen = g.screen || "welcome";
+  state.stage = g.stage || 0;
+  state.qIndex = g.qIndex || 0;
+  state.score = g.score || 0;
+  state.totalQuestions = g.totalQuestions || totalQuestions();
+  state.badges = Array.isArray(g.badges) ? g.badges.slice() : [false,false,false,false];
+  state.lastSelected = typeof g.lastSelected !== "undefined" ? g.lastSelected : null;
+  state.lastCorrect = typeof g.lastCorrect !== "undefined" ? g.lastCorrect : null;
+  state.finalQIndex = g.finalQIndex || 0;
+}
+
+/* ============== STATE ============== */
+let state = {
+  // Top-level screen: picker | create | welcome | story | lesson | practice | reward | final | victory
+  screen: "picker",
+  // Game state for the active player (mirrors what's saved in their player record):
+  stage: 0, qIndex: 0, score: 0, totalQuestions: 0,
+  badges: [false,false,false,false],
+  lastSelected: null, lastCorrect: null, finalQIndex: 0,
+  // Global UI state:
+  showHelp: false,
+  // Multi-player:
+  players: [],
+  activePlayerId: null,
+  // Create-player form state:
+  newName: "",
+  newGender: null, // "girl" | "boy" | null (custom)
+  // Modal (delete captcha):
+  modal: null // null or { kind:"delete-captcha", playerId, captcha:{q,n,a}, value, error }
+};
+
+/* ============== RENDER ============== */
 const content = document.getElementById("content");
 const card = document.getElementById("card");
+const modalRoot = document.getElementById("modal-root");
+
 function helpButton() {
   return `<button class="help-toggle" data-action="toggle-help" aria-label="Toggle reference panel" style="position:absolute;top:14px;right:14px;">?</button>`;
 }
@@ -668,23 +678,134 @@ function topBar(showProgress) {
   }
   return `<div class="top-bar"><div class="progress-map">${dots}</div><div class="score-pill">★ ${state.score}</div></div>`;
 }
-function renderWelcome() {
-  let resumeBlock = "";
-  if (resumableSnapshot) {
-    const stageName = resumableSnapshot.screen === "final" ? "the Lost Scroll" : (STAGES[resumableSnapshot.stage] ? STAGES[resumableSnapshot.stage].name : "your journey");
-    resumeBlock = `<p class="resume-note">Marcus paused at ${stageName}. Pick up where you left off?</p><button class="primary-btn" data-action="continue">Continue Adventure</button><button class="restart-btn" data-action="begin">Start Over</button>`;
-  } else {
-    resumeBlock = `<button class="primary-btn" data-action="begin">Begin the Journey</button>`;
-  }
-  return `${helpButton()}<div class="center"><div class="scene-illus">${svgIllus("scroll")}</div><h1 class="scene-title">The Lost Scroll</h1><div class="scene-subtitle">A Roman Numeral Adventure</div><div class="max-w" style="margin-top:18px;"><div style="display:flex;gap:18px;align-items:center;text-align:left;"><div style="flex-shrink:0;">${svgIllus("marcus")}</div><p class="scene-text" style="margin:0;">You are <strong>Marcus</strong>, a young messenger boy in ancient Rome. A mysterious scroll has appeared, written in symbols you cannot yet read. To deliver it, you must travel through four great places of Rome — the <strong>Forum</strong>, the <strong>Aqueduct</strong>, the <strong>Colosseum</strong>, and the <strong>Emperor's Hall</strong> — and master the ancient art of Roman numerals.</p></div></div>${helpPanel()}${resumeBlock}</div>`;
+function playerStrip() {
+  if (!state.activePlayerId) return "";
+  const p = findPlayer(state.activePlayerId);
+  if (!p) return "";
+  const cls = p.gender === "girl" ? "feminine" : (p.gender === "boy" ? "masculine" : "");
+  const mark = p.gender === "girl" ? "♀" : (p.gender === "boy" ? "♂" : "");
+  return `<div class="player-strip"><span class="who ${cls}"><span class="gender-mark">${mark}</span>Playing as ${escapeHtml(p.name)} · auto-saved</span><button class="switch-link" data-action="back-to-picker">Switch player</button></div>`;
 }
+
+function renderPicker() {
+  const cards = state.players.map(p => {
+    const cls = p.gender === "girl" ? "feminine" : (p.gender === "boy" ? "masculine" : "");
+    const mark = p.gender === "girl" ? "♀" : (p.gender === "boy" ? "♂" : "");
+    const badgeDots = p.gameState && Array.isArray(p.gameState.badges)
+      ? p.gameState.badges.map(b => `<span class="b-dot${b ? ' earned' : ''}"></span>`).join("")
+      : '<span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span>';
+    const score = (p.gameState && typeof p.gameState.score === "number") ? p.gameState.score : 0;
+    const stageNames = ["The Forum", "The Aqueduct", "The Colosseum", "The Emperor's Hall"];
+    let progressLabel = "Hasn't started yet";
+    if (p.gameState && p.gameState.screen) {
+      if (p.gameState.screen === "victory") progressLabel = "Finished the journey";
+      else if (p.gameState.screen === "final") progressLabel = "On the Lost Scroll";
+      else if (p.gameState.screen !== "welcome") progressLabel = "At " + (stageNames[p.gameState.stage] || "your journey");
+    }
+    return `<div class="player-card ${cls}" data-action="select-player" data-player="${p.id}" role="button" tabindex="0">
+      <button class="delete-btn" data-action="request-delete" data-player="${p.id}" aria-label="Delete ${escapeHtml(p.name)}'s save">✕</button>
+      <div class="player-name"><span class="gender-mark">${mark}</span>${escapeHtml(p.name)}</div>
+      <div class="player-stats">
+        <span class="badges-mini">${badgeDots}</span>
+        <span>★ ${score}</span>
+      </div>
+      <div class="player-stats"><span class="last-seen">${progressLabel}</span></div>
+    </div>`;
+  }).join("");
+  return `${helpButton()}
+    <div class="center">
+      <div class="scene-illus">${svgIllus("scroll")}</div>
+      <h1 class="scene-title">The Lost Scroll</h1>
+      <div class="scene-subtitle">A Roman Numeral Adventure</div>
+      <div class="picker-title">Choose your messenger</div>
+      <div class="picker-subtitle">Up to six players. Each has their own progress.</div>
+      <div class="player-grid">
+        ${cards}
+        ${state.players.length < 6 ? `<div class="add-player-card" data-action="open-create" role="button" tabindex="0"><div class="plus">+</div><div class="add-label">Add new player</div></div>` : ""}
+      </div>
+      ${helpPanel()}
+    </div>`;
+}
+
+function renderCreate() {
+  const allTiles = (gender, names) => {
+    const cls = gender === "girl" ? "feminine" : "masculine";
+    const mark = gender === "girl" ? "♀" : "♂";
+    const label = gender === "girl" ? "Girls" : "Boys";
+    const tiles = names.map(n => {
+      const sel = (state.newName === n && state.newGender === gender) ? " selected" : "";
+      return `<div class="name-tile${sel}" data-action="pick-name" data-name="${escapeHtml(n)}" data-gender="${gender}" role="button" tabindex="0">${escapeHtml(n)}</div>`;
+    }).join("");
+    return `<div class="name-col ${cls}">
+      <div class="name-col-header"><span class="gender-mark">${mark}</span>${label}</div>
+      <div class="name-tiles">${tiles}</div>
+    </div>`;
+  };
+  const customSelected = state.newName && state.newGender === null;
+  return `${helpButton()}
+    <div class="center">
+      <h1 class="scene-title" style="font-size:24px;">Who's playing?</h1>
+      <div class="scene-subtitle">Type a name or pick a Roman one.</div>
+    </div>
+    <div class="create-form">
+      <div class="field-label">Type a name</div>
+      <input
+        type="text"
+        class="name-input"
+        id="custom-name-input"
+        maxlength="20"
+        value="${escapeHtml(state.newName || "")}"
+        placeholder="(any name, up to 20 letters)"
+        data-action="custom-name-typing"
+        autocomplete="off"
+      />
+      <div class="or-divider">— or pick one —</div>
+      <div class="name-columns">
+        ${allTiles("girl", NAMES_GIRLS)}
+        ${allTiles("boy", NAMES_BOYS)}
+      </div>
+      <div class="create-actions">
+        <button class="restart-btn" data-action="cancel-create">Cancel</button>
+        <button class="primary-btn" data-action="confirm-create" ${state.newName ? "" : "disabled"} style="margin:0;">Begin Journey →</button>
+      </div>
+    </div>`;
+}
+
+function renderWelcome() {
+  const p = findPlayer(state.activePlayerId);
+  const hasProgress = p && p.gameState && p.gameState.screen && p.gameState.screen !== "welcome" && p.gameState.screen !== "victory";
+  let actionsBlock = "";
+  if (hasProgress) {
+    const stageName = p.gameState.screen === "final" ? "the Lost Scroll" : (STAGES[p.gameState.stage] ? STAGES[p.gameState.stage].name : "your journey");
+    actionsBlock = `<p class="resume-note">${escapeHtml(p.name)} paused at ${stageName}. Pick up where you left off?</p>
+      <button class="primary-btn" data-action="continue">Continue Adventure</button>
+      <button class="restart-btn" data-action="restart-player">Start ${escapeHtml(p.name)} Over</button>`;
+  } else {
+    actionsBlock = `<button class="primary-btn" data-action="begin">Begin the Journey</button>`;
+  }
+  return `${playerStrip()}${helpButton()}
+    <div class="center">
+      <div class="scene-illus">${svgIllus("scroll")}</div>
+      <h1 class="scene-title">The Lost Scroll</h1>
+      <div class="scene-subtitle">A Roman Numeral Adventure</div>
+      <div class="max-w" style="margin-top:18px;">
+        <div style="display:flex;gap:18px;align-items:center;text-align:left;">
+          <div style="flex-shrink:0;">${svgIllus("marcus")}</div>
+          <p class="scene-text" style="margin:0;">You are a young messenger boy in ancient Rome. A mysterious scroll has appeared, written in symbols you cannot yet read. To deliver it, you must travel through four great places of Rome — the <strong>Forum</strong>, the <strong>Aqueduct</strong>, the <strong>Colosseum</strong>, and the <strong>Emperor's Hall</strong> — and master the ancient art of Roman numerals.</p>
+        </div>
+      </div>
+      ${helpPanel()}
+      ${actionsBlock}
+    </div>`;
+}
+
 function renderStory() {
   const s = STAGES[state.stage];
-  return `${topBar(true)}${helpButton()}<div class="scene-illus">${svgIllus(s.illus)}</div><div class="qtype-chip center" style="display:block;text-align:center;">Stage ${state.stage + 1} of IV</div><h2 class="scene-title">${s.name}</h2><div class="max-w"><p class="scene-text">${s.story}</p></div>${helpPanel()}<button class="primary-btn" data-action="to-lesson">Meet the Symbols</button>`;
+  return `${playerStrip()}${topBar(true)}${helpButton()}<div class="scene-illus">${svgIllus(s.illus)}</div><div class="qtype-chip center" style="display:block;text-align:center;">Stage ${state.stage + 1} of IV</div><h2 class="scene-title">${s.name}</h2><div class="max-w"><p class="scene-text">${s.story}</p></div>${helpPanel()}<button class="primary-btn" data-action="to-lesson">Meet the Symbols</button>`;
 }
 function renderLesson() {
   const s = STAGES[state.stage];
-  return `${topBar(true)}${helpButton()}<h2 class="scene-title" style="font-size:22px;">Where the Symbols Come From</h2><div class="origins">${s.origins.map(o => `<div class="origin-card"><div class="origin-symbol">${o.sym}<span class="val">= ${o.val}</span></div><div class="origin-text">${o.text}</div></div>`).join("")}</div><div class="math-box"><div class="label">${s.math.label}</div><div>${s.math.text}</div><div class="math-example">${s.math.example}</div></div><h3 class="scene-title" style="font-size:18px;margin-top:20px;">Examples to Read</h3><div class="examples-grid">${s.examples.map(e => `<div class="ex-tile"><div class="er">${e.n}</div><div class="ev">= ${e.v}</div></div>`).join("")}</div>${helpPanel()}<button class="primary-btn" data-action="to-practice">Try It Out (${s.questions.length} Questions)</button>`;
+  return `${playerStrip()}${topBar(true)}${helpButton()}<h2 class="scene-title" style="font-size:22px;">Where the Symbols Come From</h2><div class="origins">${s.origins.map(o => `<div class="origin-card"><div class="origin-symbol">${o.sym}<span class="val">= ${o.val}</span></div><div class="origin-text">${o.text}</div></div>`).join("")}</div><div class="math-box"><div class="label">${s.math.label}</div><div>${s.math.text}</div><div class="math-example">${s.math.example}</div></div><h3 class="scene-title" style="font-size:18px;margin-top:20px;">Examples to Read</h3><div class="examples-grid">${s.examples.map(e => `<div class="ex-tile"><div class="er">${e.n}</div><div class="ev">= ${e.v}</div></div>`).join("")}</div>${helpPanel()}<button class="primary-btn" data-action="to-practice">Try It Out (${s.questions.length} Questions)</button>`;
 }
 function renderPractice() {
   const s = STAGES[state.stage];
@@ -698,8 +819,8 @@ function renderPractice() {
       ? `<div class="feedback good">✓ Correct!<span class="explainer">${q.explain}</span></div>`
       : `<div class="feedback bad">Not quite — the answer was <strong>${q.answer}</strong>.<span class="explainer">${q.explain}</span></div>`;
   }
-  const typeLabels = { read: "Read the numeral", write: "Write the numeral", story: "Roman scenario", trick: "Find the mistake", math: "Numeral math" };
-  return `${topBar(true)}${helpButton()}<div class="qtype-chip center" style="display:block;text-align:center;">${typeLabels[q.type] || "Practice"}</div><div class="q-counter">${s.name} — Question ${state.qIndex + 1} of ${s.questions.length}</div><div class="q-prompt">${q.prompt}</div>${mainDisplay}<div class="options-grid">${q.options.map(opt => {
+  const typeLabels = { read: "Read the numeral", write: "Write the numeral", story: "Roman scenario", math: "Numeral math" };
+  return `${playerStrip()}${topBar(true)}${helpButton()}<div class="qtype-chip center" style="display:block;text-align:center;">${typeLabels[q.type] || "Practice"}</div><div class="q-counter">${s.name} — Question ${state.qIndex + 1} of ${s.questions.length}</div><div class="q-prompt">${q.prompt}</div>${mainDisplay}<div class="options-grid">${q.options.map(opt => {
     let cls = "option-btn";
     if (answered) {
       if (opt === q.answer) cls += " correct";
@@ -712,7 +833,7 @@ function renderPractice() {
 function renderReward() {
   const s = STAGES[state.stage];
   const isLast = state.stage === STAGES.length - 1;
-  return `${topBar(true)}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><h2 class="scene-title">Stage Complete!</h2><div class="reward-name">You earned ${s.rewardName}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge ${earned ? 'earned' : 'locked'}" title="${STAGES[i].rewardName}"><span class="roman">${["I","II","III","IV"][i]}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);">${isLast ? "All four badges are yours! The path to the Emperor's Hall is complete. The lost scroll awaits..." : "Marcus tucks the reward into his satchel and continues toward his next destination."}</p><button class="primary-btn" data-action="${isLast ? 'to-final' : 'next-stage'}">${isLast ? "Read the Lost Scroll" : "Continue the Journey"}</button></div>`;
+  return `${playerStrip()}${topBar(true)}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><h2 class="scene-title">Stage Complete!</h2><div class="reward-name">You earned ${s.rewardName}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge ${earned ? 'earned' : 'locked'}" title="${STAGES[i].rewardName}"><span class="roman">${["I","II","III","IV"][i]}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);">${isLast ? "All four badges are yours! The path to the Emperor's Hall is complete. The lost scroll awaits..." : "Marcus tucks the reward into his satchel and continues toward his next destination."}</p><button class="primary-btn" data-action="${isLast ? 'to-final' : 'next-stage'}">${isLast ? "Read the Lost Scroll" : "Continue the Journey"}</button></div>`;
 }
 function renderFinal() {
   const q = FINAL_CHALLENGE.questions[state.finalQIndex];
@@ -725,7 +846,7 @@ function renderFinal() {
       ? `<div class="feedback good">✓ Correct!<span class="explainer">${q.explain}</span></div>`
       : `<div class="feedback bad">The answer was <strong>${q.answer}</strong>.<span class="explainer">${q.explain}</span></div>`;
   }
-  return `${topBar(false)}${helpButton()}<div class="center"><div class="scene-illus">${svgIllus("scroll")}</div><h2 class="scene-title">The Lost Scroll</h2>${isFirst && !answered ? `<p class="scene-text max-w">${FINAL_CHALLENGE.intro}</p>` : ""}<div class="qtype-chip">Final Challenge</div><div class="q-counter">Line ${state.finalQIndex + 1} of ${FINAL_CHALLENGE.questions.length}</div><div class="q-prompt">${q.prompt}</div><div class="q-numeral">${q.numeral}</div><div class="options-grid">${q.options.map(opt => {
+  return `${playerStrip()}${topBar(false)}${helpButton()}<div class="center"><div class="scene-illus">${svgIllus("scroll")}</div><h2 class="scene-title">The Lost Scroll</h2>${isFirst && !answered ? `<p class="scene-text max-w">${FINAL_CHALLENGE.intro}</p>` : ""}<div class="qtype-chip">Final Challenge</div><div class="q-counter">Line ${state.finalQIndex + 1} of ${FINAL_CHALLENGE.questions.length}</div><div class="q-prompt">${q.prompt}</div><div class="q-numeral">${q.numeral}</div><div class="options-grid">${q.options.map(opt => {
     let cls = "option-btn";
     if (answered) {
       if (opt === q.answer) cls += " correct";
@@ -736,104 +857,314 @@ function renderFinal() {
   }).join("")}</div>${feedback}${helpPanel()}${answered ? `<button class="primary-btn" data-action="next-final">${isLast ? "See Your Victory" : "Decode Next Line →"}</button>` : ""}</div>`;
 }
 function renderVictory() {
-  return `<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><div class="victory-banner"><h1>VICTORY, MARCUS!</h1><div class="scene-subtitle">Messenger of Rome</div></div><p class="scene-text max-w">You read every line of the lost scroll and delivered the message to the Emperor himself. The Senate and People of Rome honor your skill. You now understand Roman numerals — the same symbols still used today on clocks, chapter headings, the Olympic Games, movie credits, and the Super Bowl!</p><div class="victory-final-score">Final score: ${state.score} / ${state.totalQuestions}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge earned" title="${STAGES[i].rewardName}"><span class="roman">${["I","II","III","IV"][i]}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);text-align:center;">— Ave Roma, Ave Marcus —</p><button class="primary-btn" data-action="restart">Play Again</button></div>`;
+  const p = findPlayer(state.activePlayerId);
+  const name = p ? escapeHtml(p.name) : "Messenger";
+  return `${playerStrip()}<div class="center"><div class="scene-illus">${svgIllus("trophy")}</div><div class="victory-banner"><h1>VICTORY, ${name.toUpperCase()}!</h1><div class="scene-subtitle">Messenger of Rome</div></div><p class="scene-text max-w">You read every line of the lost scroll and delivered the message to the Emperor himself. The Senate and People of Rome honor your skill. You now understand Roman numerals — the same symbols still used today on clocks, chapter headings, the Olympic Games, movie credits, and the Super Bowl!</p><div class="victory-final-score">Final score: ${state.score} / ${state.totalQuestions}</div><div class="badge-row">${state.badges.map((earned, i) => `<div class="badge earned" title="${STAGES[i].rewardName}"><span class="roman">${["I","II","III","IV"][i]}</span></div>`).join("")}</div><p class="scene-text max-w" style="font-style:italic;color:var(--ink-light);text-align:center;">— Ave Roma, Ave ${name} —</p><button class="primary-btn" data-action="restart-player">Play Again</button><button class="restart-btn" data-action="back-to-picker">Back to player picker</button></div>`;
 }
+
+function renderModal() {
+  if (!state.modal) { modalRoot.innerHTML = ""; return; }
+  if (state.modal.kind === "delete-captcha") {
+    const m = state.modal;
+    const p = findPlayer(m.playerId);
+    if (!p) { state.modal = null; modalRoot.innerHTML = ""; return; }
+    modalRoot.innerHTML = `
+      <div class="modal-backdrop" data-action="modal-backdrop">
+        <div class="modal-card" role="dialog" aria-labelledby="dlg-title">
+          <h3 id="dlg-title">Delete ${escapeHtml(p.name)}'s save?</h3>
+          <p class="modal-sub">This will erase ${escapeHtml(p.name)}'s progress permanently. To confirm, solve this Roman numeral problem:</p>
+          <div class="captcha-problem">${m.captcha.q}</div>
+          <input type="text"
+            class="captcha-input"
+            id="captcha-input"
+            value="${escapeHtml(m.value || "")}"
+            placeholder="Roman or number"
+            data-action="captcha-typing"
+            autocomplete="off"
+            autocapitalize="characters" />
+          <div class="captcha-hint">Answer as a Roman numeral (e.g. XLIX) or a number (e.g. 49).</div>
+          <div class="captcha-error">${m.error || ""}</div>
+          <div class="modal-actions">
+            <button class="modal-cancel" data-action="cancel-delete">Cancel</button>
+            <button class="modal-confirm" data-action="confirm-delete" ${m.value ? "" : "disabled"}>Delete</button>
+          </div>
+        </div>
+      </div>`;
+    // Focus the input
+    setTimeout(() => {
+      const inp = document.getElementById("captcha-input");
+      if (inp) inp.focus();
+    }, 0);
+  }
+}
+
 function render() {
   let html = "";
   switch (state.screen) {
-    case "welcome": html = renderWelcome(); break;
-    case "story": html = renderStory(); break;
-    case "lesson": html = renderLesson(); break;
+    case "picker":   html = renderPicker(); break;
+    case "create":   html = renderCreate(); break;
+    case "welcome":  html = renderWelcome(); break;
+    case "story":    html = renderStory(); break;
+    case "lesson":   html = renderLesson(); break;
     case "practice": html = renderPractice(); break;
-    case "reward": html = renderReward(); break;
-    case "final": html = renderFinal(); break;
-    case "victory": html = renderVictory(); break;
+    case "reward":   html = renderReward(); break;
+    case "final":    html = renderFinal(); break;
+    case "victory":  html = renderVictory(); break;
   }
   content.innerHTML = html;
-  saveState();
+  // Persist active player's game state on render — but only for actual game screens.
+  // Skip "welcome" because that's a launching UI, not real progress; otherwise selecting
+  // a player and showing them welcome would overwrite their saved screen as "welcome".
+  // Also skip "picker" and "create" (no active player game state to persist there).
+  if (state.activePlayerId
+      && state.screen !== "picker"
+      && state.screen !== "create"
+      && state.screen !== "welcome") {
+    persistActivePlayerGameState();
+  }
+  renderModal();
+  // Re-attach focus / value preservation for inputs
+  if (state.screen === "create") {
+    const inp = document.getElementById("custom-name-input");
+    if (inp && document.activeElement !== inp) {
+      // place caret at end
+      const v = inp.value;
+      inp.focus();
+      inp.setSelectionRange(v.length, v.length);
+    }
+  }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-function totalQuestions() {
-  return STAGES.reduce((acc, s) => acc + s.questions.length, 0) + FINAL_CHALLENGE.questions.length;
-}
-card.addEventListener("click", function(e) {
+
+/* ============== EVENTS ============== */
+// Click delegation on the card and modal root.
+function handleClick(e) {
   const t = e.target.closest("[data-action]");
   if (!t) return;
   const action = t.dataset.action;
-  if (action === "toggle-help") { state.showHelp = !state.showHelp; render(); return; }
-  if (action === "begin") {
-    clearSavedState();
-    resumableSnapshot = null;
-    state = { screen: "story", stage: 0, qIndex: 0, score: 0, totalQuestions: totalQuestions(), badges: [false,false,false,false], lastSelected: null, lastCorrect: null, showHelp: state.showHelp, finalQIndex: 0 };
-    render(); return;
-  }
-  if (action === "continue") {
-    if (resumableSnapshot) {
-      state = Object.assign({}, state, resumableSnapshot, { showHelp: state.showHelp });
-      if (!state.totalQuestions) state.totalQuestions = totalQuestions();
-      resumableSnapshot = null;
+  switch (action) {
+    case "toggle-help":     state.showHelp = !state.showHelp; render(); return;
+    case "open-create":
+      state.screen = "create";
+      state.newName = "";
+      state.newGender = null;
+      render(); return;
+    case "cancel-create":
+      state.screen = "picker";
+      state.newName = "";
+      state.newGender = null;
+      render(); return;
+    case "pick-name":
+      state.newName = t.dataset.name || "";
+      state.newGender = t.dataset.gender || null;
+      render(); return;
+    case "confirm-create": {
+      const name = (state.newName || "").trim().slice(0, 20);
+      if (!name) return;
+      const player = {
+        id: genId(),
+        name: name,
+        gender: state.newGender, // may be null for custom-typed names
+        gameState: defaultGameState(),
+        lastPlayed: Date.now()
+      };
+      state.players.push(player);
+      persistPlayers();
+      state.activePlayerId = player.id;
+      setActiveId(player.id);
+      loadActivePlayerGameState();
+      state.screen = "welcome";
+      state.newName = "";
+      state.newGender = null;
+      render(); return;
     }
-    render(); return;
-  }
-  if (action === "to-lesson") { state.screen = "lesson"; render(); return; }
-  if (action === "to-practice") {
-    state.screen = "practice"; state.qIndex = 0; state.lastCorrect = null; state.lastSelected = null;
-    render(); return;
-  }
-  if (action === "answer") {
-    const raw = t.dataset.value;
-    const q = STAGES[state.stage].questions[state.qIndex];
-    const val = (typeof q.answer === "number") ? parseInt(raw, 10) : raw;
-    state.lastSelected = val;
-    state.lastCorrect = (val === q.answer);
-    if (state.lastCorrect) state.score++;
-    render(); return;
-  }
-  if (action === "next-question") {
-    const s = STAGES[state.stage];
-    if (state.qIndex < s.questions.length - 1) {
-      state.qIndex++; state.lastCorrect = null; state.lastSelected = null; render();
-    } else {
-      state.badges[state.stage] = true; state.screen = "reward"; render();
+    case "select-player":
+      state.activePlayerId = t.dataset.player;
+      setActiveId(t.dataset.player);
+      loadActivePlayerGameState();
+      state.screen = "welcome";
+      render(); return;
+    case "back-to-picker":
+      state.activePlayerId = null;
+      setActiveId(null);
+      state.screen = "picker";
+      render(); return;
+    case "request-delete": {
+      e.preventDefault(); e.stopPropagation();
+      const playerId = t.dataset.player;
+      const cap = CAPTCHA_PROBLEMS[Math.floor(Math.random() * CAPTCHA_PROBLEMS.length)];
+      state.modal = { kind: "delete-captcha", playerId, captcha: cap, value: "", error: "" };
+      render(); return;
     }
+    case "cancel-delete":
+    case "modal-backdrop":
+      // Only close when clicking the backdrop itself, not its children.
+      if (action === "modal-backdrop" && e.target !== t) return;
+      state.modal = null;
+      render(); return;
+    case "confirm-delete": {
+      if (!state.modal) return;
+      const m = state.modal;
+      const parsed = parseAnswer(m.value);
+      if (parsed === m.captcha.n) {
+        // Correct — delete the player.
+        const id = m.playerId;
+        state.players = state.players.filter(p => p.id !== id);
+        persistPlayers();
+        if (state.activePlayerId === id) {
+          state.activePlayerId = null;
+          setActiveId(null);
+        }
+        state.modal = null;
+        state.screen = "picker";
+        render();
+      } else {
+        m.error = "That's not the right answer. Try again.";
+        m.value = "";
+        render();
+      }
+      return;
+    }
+    case "begin":
+      // Start the active player's adventure fresh
+      if (!state.activePlayerId) return;
+      state.stage = 0; state.qIndex = 0; state.score = 0;
+      state.totalQuestions = totalQuestions();
+      state.badges = [false,false,false,false];
+      state.lastSelected = null; state.lastCorrect = null; state.finalQIndex = 0;
+      state.screen = "story";
+      render(); return;
+    case "continue":
+      // gameState already loaded for active player; just go to whatever screen they were on.
+      const p = findPlayer(state.activePlayerId);
+      if (p && p.gameState && p.gameState.screen) {
+        loadActivePlayerGameState();
+        // Already loaded by select-player flow; but in case continue clicked from welcome:
+        state.screen = p.gameState.screen;
+      }
+      render(); return;
+    case "restart-player":
+      // Clear the active player's progress and go to welcome.
+      // Force-persist the cleared state since the welcome screen otherwise skips persistence.
+      if (state.activePlayerId) {
+        state.stage = 0; state.qIndex = 0; state.score = 0;
+        state.totalQuestions = totalQuestions();
+        state.badges = [false,false,false,false];
+        state.lastSelected = null; state.lastCorrect = null; state.finalQIndex = 0;
+        state.screen = "welcome";
+        persistActivePlayerGameState();
+      }
+      render(); return;
+    case "to-lesson":   state.screen = "lesson"; render(); return;
+    case "to-practice":
+      state.screen = "practice"; state.qIndex = 0; state.lastCorrect = null; state.lastSelected = null;
+      render(); return;
+    case "answer": {
+      const raw = t.dataset.value;
+      const q = STAGES[state.stage].questions[state.qIndex];
+      const val = (typeof q.answer === "number") ? parseInt(raw, 10) : raw;
+      state.lastSelected = val;
+      state.lastCorrect = (val === q.answer);
+      if (state.lastCorrect) state.score++;
+      render(); return;
+    }
+    case "next-question": {
+      const s = STAGES[state.stage];
+      if (state.qIndex < s.questions.length - 1) {
+        state.qIndex++; state.lastCorrect = null; state.lastSelected = null; render();
+      } else {
+        state.badges[state.stage] = true; state.screen = "reward"; render();
+      }
+      return;
+    }
+    case "next-stage":
+      state.stage++; state.screen = "story"; state.qIndex = 0; state.lastCorrect = null; state.lastSelected = null;
+      render(); return;
+    case "to-final":
+      state.screen = "final"; state.finalQIndex = 0; state.lastCorrect = null; state.lastSelected = null;
+      render(); return;
+    case "answer-final": {
+      const raw = t.dataset.value;
+      const q = FINAL_CHALLENGE.questions[state.finalQIndex];
+      const val = (typeof q.answer === "number") ? parseInt(raw, 10) : raw;
+      state.lastSelected = val;
+      state.lastCorrect = (val === q.answer);
+      if (state.lastCorrect) state.score++;
+      render(); return;
+    }
+    case "next-final":
+      if (state.finalQIndex < FINAL_CHALLENGE.questions.length - 1) {
+        state.finalQIndex++; state.lastCorrect = null; state.lastSelected = null; render();
+      } else {
+        state.screen = "victory"; render();
+      }
+      return;
+  }
+}
+function handleInput(e) {
+  const t = e.target;
+  const action = t.dataset.action;
+  if (action === "custom-name-typing") {
+    state.newName = (t.value || "").slice(0, 20);
+    state.newGender = null; // custom typed name has no gender association
+    // Don't full re-render on every keystroke; just update the Begin button enabled state
+    const begin = card.querySelector('[data-action="confirm-create"]');
+    if (begin) {
+      if (state.newName) begin.removeAttribute("disabled"); else begin.setAttribute("disabled", "");
+    }
+    // Clear any selected name tile
+    card.querySelectorAll(".name-tile.selected").forEach(el => el.classList.remove("selected"));
     return;
   }
-  if (action === "next-stage") {
-    state.stage++; state.screen = "story"; state.qIndex = 0; state.lastCorrect = null; state.lastSelected = null;
-    render(); return;
-  }
-  if (action === "to-final") {
-    state.screen = "final"; state.finalQIndex = 0; state.lastCorrect = null; state.lastSelected = null;
-    render(); return;
-  }
-  if (action === "answer-final") {
-    const raw = t.dataset.value;
-    const q = FINAL_CHALLENGE.questions[state.finalQIndex];
-    const val = (typeof q.answer === "number") ? parseInt(raw, 10) : raw;
-    state.lastSelected = val;
-    state.lastCorrect = (val === q.answer);
-    if (state.lastCorrect) state.score++;
-    render(); return;
-  }
-  if (action === "next-final") {
-    if (state.finalQIndex < FINAL_CHALLENGE.questions.length - 1) {
-      state.finalQIndex++; state.lastCorrect = null; state.lastSelected = null; render();
-    } else {
-      state.screen = "victory"; render();
+  if (action === "captcha-typing" && state.modal) {
+    state.modal.value = t.value || "";
+    state.modal.error = "";
+    const confirmBtn = modalRoot.querySelector('[data-action="confirm-delete"]');
+    if (confirmBtn) {
+      if (state.modal.value) confirmBtn.removeAttribute("disabled"); else confirmBtn.setAttribute("disabled", "");
     }
-    return;
   }
-  if (action === "restart") {
-    clearSavedState();
-    resumableSnapshot = null;
-    state = { screen: "welcome", stage: 0, qIndex: 0, score: 0, totalQuestions: 0, badges: [false,false,false,false], lastSelected: null, lastCorrect: null, showHelp: false, finalQIndex: 0 };
-    render(); return;
+}
+function handleKeydown(e) {
+  // Enter inside captcha submits
+  if (e.key === "Enter" && state.modal && e.target.id === "captcha-input") {
+    e.preventDefault();
+    const btn = modalRoot.querySelector('[data-action="confirm-delete"]');
+    if (btn && !btn.disabled) btn.click();
   }
-});
+  // Escape closes modal
+  if (e.key === "Escape" && state.modal) {
+    state.modal = null;
+    render();
+  }
+  // Enter on custom name input → submit if valid
+  if (e.key === "Enter" && state.screen === "create" && e.target.id === "custom-name-input") {
+    e.preventDefault();
+    const btn = card.querySelector('[data-action="confirm-create"]');
+    if (btn && !btn.disabled) btn.click();
+  }
+}
+
+card.addEventListener("click", handleClick);
+modalRoot.addEventListener("click", handleClick);
+card.addEventListener("input", handleInput);
+modalRoot.addEventListener("input", handleInput);
+document.addEventListener("keydown", handleKeydown);
+
+/* ============== INIT ============== */
 (function init() {
-  const saved = loadSavedState();
-  if (saved && saved.screen && saved.screen !== "welcome" && saved.screen !== "victory") {
-    resumableSnapshot = saved;
+  migrateOldSave();
+  state.players = loadPlayers();
+  // Ensure totalQuestions is always set in default state
+  state.totalQuestions = totalQuestions();
+  // Don't auto-resume into a player — always start on the picker so multi-user households are explicit.
+  // But if the previously active player is still in the players list, leave activePlayerId nulled here too.
+  state.activePlayerId = null;
+  setActiveId(null);
+  if (state.players.length === 0) {
+    state.screen = "create";
+  } else {
+    state.screen = "picker";
   }
   render();
 })();

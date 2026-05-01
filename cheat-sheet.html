@@ -372,6 +372,76 @@
     text-transform: uppercase;
     font-weight: 700;
   }
+  /* REVISION */
+  .revision-area { text-align: center; margin-top: 12px; font-size: 10px; color: var(--ink-light); font-style: italic; }
+  .revision-link {
+    background: none;
+    border: none;
+    color: var(--ink-light);
+    font-style: italic;
+    font-size: 10px;
+    cursor: pointer;
+    text-decoration: underline dotted;
+    padding: 2px 4px;
+    font-family: 'Lora', serif;
+  }
+  .revision-link:hover { color: var(--wine); text-decoration-style: solid; }
+  .revision-print { display: none; }
+  /* CHANGELOG MODAL */
+  .changelog-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(58, 40, 20, 0.55);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .changelog-backdrop.open { display: flex; }
+  .changelog-card {
+    background: var(--parchment-light);
+    border: 1px solid var(--stone);
+    border-left: 5px solid var(--gold-dark);
+    border-radius: 4px;
+    padding: 24px 22px 20px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 12px 40px rgba(58, 40, 20, 0.4);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .changelog-card h3 { font-family: 'Cinzel', serif; color: var(--wine); margin-bottom: 4px; font-size: 18px; letter-spacing: 0.04em; }
+  .changelog-sub { color: var(--ink-light); font-style: italic; font-size: 12px; margin-bottom: 14px; }
+  .changelog-version {
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .changelog-version .date { color: var(--ink-light); font-weight: 400; font-size: 11px; margin-left: 8px; font-style: italic; letter-spacing: 0.02em; }
+  .changelog-list { margin-left: 18px; font-size: 13px; line-height: 1.55; }
+  .changelog-list li { margin-bottom: 4px; }
+  .changelog-close {
+    display: block;
+    margin: 20px auto 0;
+    background: var(--terracotta);
+    color: white;
+    border: 1.5px solid var(--wine);
+    border-radius: 3px;
+    padding: 8px 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 0 var(--wine);
+    transition: all 0.15s;
+  }
+  .changelog-close:hover { transform: translateY(-1px); box-shadow: 0 3px 0 var(--wine); }
   /* PRINT */
   @media print {
     @page { margin: 0.5in; size: letter; }
@@ -384,6 +454,9 @@
     .where-card { background: white; border-color: #000; }
     .page-flip-note { background: white; }
     .page-2-start { page-break-before: always; }
+    .revision-link { display: none !important; }
+    .revision-print { display: inline; color: #666; }
+    .changelog-backdrop { display: none !important; }
     h1 { color: #000; }
     h2 { color: #000; border-bottom-color: #000; }
     .rule-title, .practice-col h3, .where-label, .key-section { color: #000; }
@@ -598,6 +671,58 @@
 </div>
 
 <footer>SPQR · Senatus Populusque Romanus · Print, fold, share</footer>
+
+<div class="revision-area">
+  <button class="revision-link no-print" data-action="show-changelog" type="button">Revision v0.2 — see changes</button>
+  <span class="revision-print">v0.2 · 2026-05-01</span>
+</div>
+
+<!-- Changelog modal (hidden by default; opened by Revision link) -->
+<div class="changelog-backdrop" id="changelog-modal" data-action="changelog-backdrop" role="dialog" aria-modal="true" aria-labelledby="changelog-title">
+  <div class="changelog-card">
+    <h3 id="changelog-title">Revision History</h3>
+    <div class="changelog-sub">Marcus and the Lost Scroll — Cheat Sheet</div>
+
+    <div class="changelog-version">v0.2 <span class="date">— 2026-05-01</span></div>
+    <ul class="changelog-list">
+      <li>Two-page layout: front for reference, back for practice</li>
+      <li>New "Where You'll See Them" section with six real-world examples</li>
+      <li>New Year Decoder Challenge — six famous years to decode</li>
+      <li>New Numeral Math section — six add/subtract problems</li>
+      <li>Combined answer key with section labels</li>
+      <li>Top toolbar: Back to home + Print / Save as PDF button</li>
+    </ul>
+
+    <div class="changelog-version">v0.1 <span class="date">— 2026-05-01</span></div>
+    <ul class="changelog-list">
+      <li>Initial release: seven symbols, two rules, worked example, 16 practice problems with answer key</li>
+    </ul>
+
+    <button class="changelog-close" data-action="close-changelog" type="button">Close</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var modal = document.getElementById("changelog-modal");
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-action]");
+    if (!t) return;
+    var action = t.dataset.action;
+    if (action === "show-changelog") {
+      modal.classList.add("open");
+    } else if (action === "close-changelog") {
+      modal.classList.remove("open");
+    } else if (action === "changelog-backdrop") {
+      // Only close when clicking the backdrop itself, not the inner card.
+      if (e.target === t) modal.classList.remove("open");
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal.classList.contains("open")) modal.classList.remove("open");
+  });
+})();
+</script>
 
 </body>
 </html>
