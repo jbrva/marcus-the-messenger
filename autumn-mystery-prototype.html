@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Autumn Mystery — A Marcus Book II Prototype</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #F5E6C8;
+    --parchment-light: #FAF1DC;
+    --parchment-dark: #E8D4A8;
+    --ink: #3A2814;
+    --ink-light: #6B4F35;
+    --terracotta: #C8553D;
+    --terracotta-dark: #9A3F2D;
+    --laurel: #5C7C4E;
+    --laurel-dark: #3F5635;
+    --imperial: #5B3E7D;
+    --imperial-dark: #432d5e;
+    --gold: #D4A14A;
+    --gold-dark: #A87F35;
+    --wine: #7A2E1F;
+    --stone: #B8A984;
+    --stone-dark: #8A7B5C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--ink);
+    background: radial-gradient(circle at 20% 10%, rgba(212,161,74,0.08), transparent 50%), radial-gradient(circle at 80% 90%, rgba(122,46,31,0.07), transparent 50%), var(--parchment);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+    line-height: 1.7;
+  }
+  body::before { content: ''; position: fixed; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0.18 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>"); opacity: 0.35; z-index: 0; }
+  .container { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+  .prototype-banner {
+    background: var(--imperial);
+    color: var(--gold);
+    padding: 6px 14px;
+    border-radius: 3px;
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .scroll-card {
+    background: var(--parchment-light);
+    border: 1px solid var(--stone);
+    border-radius: 4px;
+    padding: 32px 28px;
+    box-shadow: inset 0 0 60px rgba(184,169,132,0.25), 0 4px 20px rgba(58,40,20,0.15);
+    position: relative;
+  }
+  .scroll-card::before, .scroll-card::after { content: ''; position: absolute; left: 0; right: 0; height: 14px; background: repeating-linear-gradient(90deg, var(--stone-dark) 0 8px, var(--ink-light) 8px 10px, var(--stone-dark) 10px 18px); opacity: 0.6; }
+  .scroll-card::before { top: -7px; border-radius: 4px 4px 0 0; }
+  .scroll-card::after { bottom: -7px; border-radius: 0 0 4px 4px; }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 34px;
+    color: var(--wine);
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 24px;
+    font-size: 15px;
+  }
+  p { margin-bottom: 16px; font-size: 16px; }
+  p strong { color: var(--wine); }
+  .step {
+    background: var(--parchment);
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--gold-dark);
+    border-radius: 3px;
+    padding: 18px 20px;
+    margin: 20px 0;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+  }
+  .step.active, .step.done { opacity: 1; }
+  .step-label {
+    font-family: 'Cinzel', serif;
+    color: var(--wine);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .step-question {
+    font-size: 17px;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .step-question em { color: var(--wine); font-family: 'Cinzel', serif; font-style: normal; font-weight: 700; }
+  .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+    max-width: 480px;
+  }
+  .opt-btn {
+    background: var(--parchment-light);
+    border: 2px solid var(--stone-dark);
+    border-radius: 4px;
+    padding: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--wine);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .opt-btn:hover:not(:disabled) { background: var(--gold); border-color: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 3px 6px rgba(58,40,20,0.18); }
+  .opt-btn:disabled { cursor: default; }
+  .opt-btn.correct { background: var(--laurel); color: var(--parchment-light); border-color: var(--laurel-dark); }
+  .opt-btn.wrong { background: var(--terracotta); color: white; border-color: var(--terracotta-dark); }
+  .opt-btn.dim { opacity: 0.4; }
+  .feedback {
+    margin-top: 12px;
+    font-style: italic;
+    color: var(--laurel-dark);
+    min-height: 22px;
+  }
+  .feedback.wrong { color: var(--terracotta-dark); }
+  .reveal-btn {
+    background: var(--terracotta);
+    color: var(--parchment-light);
+    border: 2px solid var(--wine);
+    border-radius: 4px;
+    padding: 12px 26px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--wine);
+    transition: all 0.15s;
+    display: block;
+    margin: 8px auto 0;
+  }
+  .reveal-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--wine); }
+  .reveal-btn.imperial { background: var(--imperial); border-color: var(--imperial-dark); box-shadow: 0 3px 0 var(--imperial-dark); }
+  .reveal-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+  }
+  .reveal-panel.open { max-height: 2000px; }
+  .explain-card {
+    background: var(--imperial);
+    color: var(--parchment-light);
+    padding: 20px 22px;
+    border-radius: 4px;
+    margin-top: 18px;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+  .explain-card .label {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .explain-card strong { color: var(--gold); font-weight: 700; }
+  /* Month timeline */
+  .month-timeline {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3px;
+    margin: 16px 0;
+  }
+  .month-cell {
+    padding: 8px 2px;
+    text-align: center;
+    background: var(--parchment);
+    border: 1px solid var(--stone);
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--wine);
+    letter-spacing: 0.04em;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+  .month-cell .pos {
+    display: block;
+    font-size: 8px;
+    color: var(--ink-light);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+  .month-cell.added { background: var(--gold); color: var(--wine); border-color: var(--gold-dark); font-weight: 700; }
+  .month-cell.numbered-latin { background: var(--parchment-dark); border-color: var(--gold-dark); }
+  .timeline-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  /* Comparison grid */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 16px 0 8px;
+  }
+  .month-card {
+    background: var(--parchment-light);
+    border: 1.5px solid var(--stone);
+    border-radius: 3px;
+    padding: 12px;
+    text-align: center;
+  }
+  .month-card .name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--wine);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .month-card .breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .month-card .from { font-style: italic; color: var(--ink-light); }
+  .month-card .arrow { color: var(--wine); font-family: 'Cinzel', serif; }
+  .month-card .position {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color: var(--imperial);
+    font-weight: 700;
+  }
+  .month-card .position .word { font-size: 10px; color: var(--ink-light); letter-spacing: 0.08em; display: block; }
+  .closer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--stone-dark);
+    font-style: italic;
+    color: var(--wine);
+    font-size: 15px;
+  }
+  .home-note {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+  .home-note a { color: var(--wine); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="scroll-card">
+    <div style="text-align:center;"><span class="prototype-banner">Prototype · Marcus Book II</span></div>
+    <h1>The Autumn Mystery</h1>
+    <div class="subtitle">A puzzle hiding on every calendar you'll ever use</div>
+
+    <p>Marcus is helping the Emperor's chief scholar sort the calendar of festivals. He notices something strange about the last four months of the year.</p>
+
+    <!-- STEP 1: septem = 7 -->
+    <div class="step active" id="step1">
+      <div class="step-label">Step I</div>
+      <div class="step-question">The word <em>September</em> comes from the Latin word <em>septem</em>. What does <em>septem</em> mean?</div>
+      <div class="options" id="opts1">
+        <button class="opt-btn" data-step="1" data-val="5">5</button>
+        <button class="opt-btn" data-step="1" data-val="6">6</button>
+        <button class="opt-btn" data-step="1" data-val="7">7</button>
+        <button class="opt-btn" data-step="1" data-val="8">8</button>
+      </div>
+      <div class="feedback" id="fb1"></div>
+    </div>
+
+    <!-- STEP 2: but September is 9th month -->
+    <div class="step" id="step2">
+      <div class="step-label">Step II</div>
+      <div class="step-question">Right. Now look at your calendar. September is which month of the year?</div>
+      <div class="options" id="opts2">
+        <button class="opt-btn" data-step="2" data-val="7">7th</button>
+        <button class="opt-btn" data-step="2" data-val="8">8th</button>
+        <button class="opt-btn" data-step="2" data-val="9">9th</button>
+        <button class="opt-btn" data-step="2" data-val="10">10th</button>
+      </div>
+      <div class="feedback" id="fb2"></div>
+    </div>
+
+    <!-- STEP 3: the reveal -->
+    <div class="step" id="step3">
+      <div class="step-label">Step III — The Puzzle</div>
+      <div class="step-question">So the name says <em>seven</em>, but the position on the calendar is <em>nine</em>. Off by two. And it happens to <strong>all four</strong> autumn months:</div>
+
+      <div class="compare-grid">
+        <div class="month-card">
+          <div class="name">September</div>
+          <div class="breakdown"><span class="from">septem</span><span class="arrow">→</span><span>7</span></div>
+          <div class="position">9<span class="word">Position</span></div>
+        </div>
+        <div class="month-card">
+          <div class="name">October</div>
+          <div class="breakdown"><span class="from">octo</span><span class="arrow">→</span><span>8</span></div>
+          <div class="position">10<span class="word">Position</span></div>
+        </div>
+        <div class="month-card">
+          <div class="name">November</div>
+          <div class="breakdown"><span class="from">novem</span><span class="arrow">→</span><span>9</span></div>
+          <div class="position">11<span class="word">Position</span></div>
+        </div>
+        <div class="month-card">
+          <div class="name">December</div>
+          <div class="breakdown"><span class="from">decem</span><span class="arrow">→</span><span>10</span></div>
+          <div class="position">12<span class="word">Position</span></div>
+        </div>
+      </div>
+
+      <p style="font-size:15px; margin: 14px 0 10px;">Every one is off by exactly two. Why?</p>
+      <button class="reveal-btn imperial" data-action="reveal">Solve the Mystery →</button>
+
+      <div class="reveal-panel" id="revealPanel">
+        <div class="explain-card">
+          <span class="label">The Answer</span>
+          <p style="margin-bottom:12px;">Long ago, the Roman year started in <strong>March</strong>, not January. The calendar had only <strong>ten months</strong> — spring through autumn — and the dark winter days had no months at all.</p>
+
+          <span class="timeline-label">The original 10-month year:</span>
+          <div class="month-timeline" style="grid-template-columns: repeat(10, 1fr);">
+            <div class="month-cell">Mar<span class="pos">1</span></div>
+            <div class="month-cell">Apr<span class="pos">2</span></div>
+            <div class="month-cell">May<span class="pos">3</span></div>
+            <div class="month-cell">Jun<span class="pos">4</span></div>
+            <div class="month-cell numbered-latin">Quintilis<span class="pos">5</span></div>
+            <div class="month-cell numbered-latin">Sextilis<span class="pos">6</span></div>
+            <div class="month-cell numbered-latin">Sept.<span class="pos">7</span></div>
+            <div class="month-cell numbered-latin">Oct.<span class="pos">8</span></div>
+            <div class="month-cell numbered-latin">Nov.<span class="pos">9</span></div>
+            <div class="month-cell numbered-latin">Dec.<span class="pos">10</span></div>
+          </div>
+
+          <p style="margin: 14px 0 12px;">Then King Numa added two new months at the <strong>end</strong> of the year — January and February — to cover the winter. Later, they were moved to the <strong>beginning</strong>. Everything else shifted two positions down:</p>
+
+          <span class="timeline-label">The calendar today:</span>
+          <div class="month-timeline">
+            <div class="month-cell added">Jan<span class="pos">1</span></div>
+            <div class="month-cell added">Feb<span class="pos">2</span></div>
+            <div class="month-cell">Mar<span class="pos">3</span></div>
+            <div class="month-cell">Apr<span class="pos">4</span></div>
+            <div class="month-cell">May<span class="pos">5</span></div>
+            <div class="month-cell">Jun<span class="pos">6</span></div>
+            <div class="month-cell">Jul<span class="pos">7</span></div>
+            <div class="month-cell">Aug<span class="pos">8</span></div>
+            <div class="month-cell numbered-latin">Sept.<span class="pos">9</span></div>
+            <div class="month-cell numbered-latin">Oct.<span class="pos">10</span></div>
+            <div class="month-cell numbered-latin">Nov.<span class="pos">11</span></div>
+            <div class="month-cell numbered-latin">Dec.<span class="pos">12</span></div>
+          </div>
+
+          <p style="margin-top:14px; margin-bottom:0;"><strong>So October means eight, but is month ten, because January and February bumped it forward two places.</strong> The mystery is hiding on every calendar you'll ever use. Now you know.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="closer" id="closer" hidden>
+      — A Marcus Book II moment, prototyped from the Trilogy Plan —
+    </div>
+
+    <div class="home-note">
+      This is a prototype for <a href="index.html">Marcus and the Lost Scroll</a> Book II · Roman Calendar.
+      The mechanic proves out that "the September mystery" lands as a satisfying puzzle rather than a rote fact.
+      Full Book II would embed this moment in a full stage with story, symbol origins, and 5–6 practice questions.
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const answers = { 1: 7, 2: 9 };
+const feedback1 = { correct: "Yes — septem means seven. Just like our word 'September' should logically mean.", wrong: "Not quite. Septem is Latin for seven — same root as 'septet' (7 musicians) or 'septuagenarian' (70-year-old)." };
+const feedback2 = { correct: "Correct. September is the 9th month. But its name means seven. Something's off…", wrong: "Look at any calendar — September is the 9th month of the year, not the position its name suggests." };
+
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest(".opt-btn");
+  if (btn) {
+    const step = parseInt(btn.dataset.step, 10);
+    const val = parseInt(btn.dataset.val, 10);
+    const correct = answers[step];
+    const container = document.getElementById("step" + step);
+    const fb = document.getElementById("fb" + step);
+    container.querySelectorAll(".opt-btn").forEach(b => {
+      const bv = parseInt(b.dataset.val, 10);
+      b.disabled = true;
+      if (bv === correct) b.classList.add("correct");
+      else if (bv === val) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+    const isCorrect = val === correct;
+    const fbData = step === 1 ? feedback1 : feedback2;
+    fb.textContent = isCorrect ? fbData.correct : fbData.wrong;
+    fb.classList.toggle("wrong", !isCorrect);
+    container.classList.remove("active");
+    container.classList.add("done");
+    const next = document.getElementById("step" + (step + 1));
+    if (next) setTimeout(() => next.classList.add("active"), 500);
+    return;
+  }
+  const reveal = e.target.closest('[data-action="reveal"]');
+  if (reveal) {
+    document.getElementById("revealPanel").classList.add("open");
+    reveal.disabled = true;
+    reveal.style.opacity = "0.5";
+    reveal.textContent = "Mystery Solved";
+    setTimeout(() => { document.getElementById("closer").hidden = false; }, 800);
+  }
+});
+</script>
+</body>
+</html>
