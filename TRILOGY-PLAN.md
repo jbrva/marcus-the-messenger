@@ -1,6 +1,8 @@
 # Marcus the Messenger — Trilogy Plan
 
-Rev 2 · 2026-09-25 · absorbs Game 1 shipping reality, URL/hub decision, Passion Timeline reverent-mode design, and pointer to the Autumn Mystery prototype.
+Rev 3 · 2026-09-25 · Autumn Mystery prototype **validated with the target reader** — Book II proceeds with this mechanic as the anchor pattern. Build kickoff: **week of 2026-09-28**.
+
+Rev 2 · 2026-09-25 · absorbed Game 1 shipping reality, URL/hub decision, Passion Timeline reverent-mode design, pointer to the Autumn Mystery prototype.
 
 A design document for a three-game series teaching Roman numerals, the Roman calendar, and the ancient/biblical/liturgical hours of the day to elementary-age children. Each game is a self-contained set of HTML files in the same illuminated-history-book aesthetic.
 
@@ -11,7 +13,7 @@ A design document for a three-game series teaching Roman numerals, the Roman cal
 | # | Title | Subject | Status |
 |---|-------|---------|--------|
 | 1 | **Marcus and the Lost Scroll** | Roman numerals (I, V, X, L, C, D, M, subtractive rule, plus archaic IIII / VIIII / V̄) | ✅ Live at `marcus-the-messenger.ctso.workers.dev` |
-| 2 | **Marcus and the Roman Calendar** | Months of the year + days of the week | Planned · Autumn Mystery prototype exists |
+| 2 | **Marcus and the Roman Calendar** | Months of the year + days of the week | ✅ Prototype validated · build starts week of 2026-09-28 |
 | 3 | **Marcus and the Hours of the Day** | Ancient / biblical / Orthodox liturgical hours | Planned |
 
 **Throughline.** Marcus is a young Roman messenger boy. In Book I he learns to read numerals to deliver a scroll. In Book II he helps sort the Emperor's festival calendar. In Book III he learns how the day itself was measured — Roman sundials, biblical timekeeping, and the Church's daily prayer cycle. Numerals learned in Book I are reused throughout; the "*octo* means 8 but October is month 10" mystery in Book II directly cashes in on knowing X and VIII.
@@ -157,7 +159,7 @@ The payoff stage. Directly reuses numerals from Book I.
 
 **The explanation:** the original Roman calendar started in March and had only 10 months. January and February were added later and eventually moved to the front of the year, pushing the numbered months two slots down. A real, memorable historical mystery hiding in plain sight on every calendar.
 
-**Prototyped as `autumn-mystery-prototype.html`** — the 3-step guided reveal (Septem = 7 → September is 9th → why?) with a full timeline animation. Play it to confirm the mechanic lands before committing to the full Book II build.
+**✅ PROTOTYPE VALIDATED (2026-09-25).** The `autumn-mystery-prototype.html` 3-step guided reveal (Septem = 7 → September is the 9th month → why?) with animated timeline **works with the target reader**. This is the confirmed anchor mechanic for Book II — every other stage in Book II should be designed to feel structurally consistent with this pattern (setup question → payoff question → guided reveal with animated visual proof). The prototype's structure (sequential `.step` reveal, animated timeline, imperial-purple explanation card) can be lifted directly as the template for other "aha" moments in the book.
 
 **Final: The Calendar Scroll**
 - Knuckle trick for 31-day months
@@ -306,14 +308,24 @@ This is the only stage that departs from the standard quiz shape. Every other st
 - **Claude has no session memory** except what's in the memory system. This document is the durable handoff — start any new session by pasting or referencing it, plus the current `index.html` / `game.html` if working on code.
 - **Prefer targeted edits over full-file rewrites** for large files (`game.html` is now ~1500 lines) — reduces risk of typos in unrelated sections.
 
-### Build order (recommended, revised)
+### Build order (revised, kickoff imminent)
 
-1. **Play the Autumn Mystery prototype** (`autumn-mystery-prototype.html`) with your son and confirm the mechanic lands. If the "aha" hits, the trilogy concept validates.
-2. **Ship Book II (Calendar)** using the file-layout pattern from Book I. Reuse everything from the design system, multi-player system, Vade Mecum pattern, parent guide pattern.
-3. **Update the landing page (`index.html`)** to become the trilogy hub — three doorway cards (Book I / Book II / Book III), with Book III marked "Coming Soon" until it ships.
+1. ✅ **Play the Autumn Mystery prototype** with the target reader — DONE 2026-09-25, validated. Trilogy concept confirmed.
+2. **▶ Build Book II (Calendar)** — kickoff week of 2026-09-28. Use the file-layout pattern from Book I. Reuse the design system, multi-player system, Vade Mecum pattern, parent guide pattern. Every stage should feel consistent with the validated Autumn Mystery pattern (setup → payoff → animated reveal).
+3. **Update the landing page (`index.html`)** to become the trilogy hub — three doorway cards (Book I / Book II / Book III), with Book III marked "Coming Soon" until it ships. Can happen during or right after Book II ships.
 4. **Design Book III (Hours)** with fresh care — the theological weight deserves it. Sketch the Reverent Mode UI for Stage II before writing any code for it. The Sundial interactive (hour lengths breathing across seasons) is also worth prototyping standalone.
 5. **Ship Book III.**
 6. **Optional retrofit pass**: shared trilogy-wide player identity (single localStorage namespace across all three books), read-aloud mode, printable completion certificates.
+
+### Book II kickoff checklist (week of 2026-09-28)
+
+- [ ] Create `calendar/` subfolder in the project
+- [ ] Copy Book I's `index.html`, `game.html`, `cheat-sheet.html`, `for-parents-and-teachers.html`, `favicon.svg`, `_headers` as starting templates
+- [ ] Strip Book I-specific game data (STAGES, FINAL_CHALLENGE) and replace with Book II data
+- [ ] Adapt the Autumn Mystery prototype's `.step` reveal pattern into `game.html` render functions for use across Stages I–IV
+- [ ] Build Stage I (Temple of Janus) as the first proof that the full-game pattern works with the new content
+- [ ] Update the root `index.html` (hub) to add a second doorway card for Book II
+- [ ] Update `TRILOGY-PLAN.md` with a "Book II as shipped" section when the book lands
 
 ---
 
